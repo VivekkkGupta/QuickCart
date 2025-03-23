@@ -1,10 +1,15 @@
-import { SideBarMenu } from "@/components/SideBarMenu/SideBarMenu";
-import Header from "@/components/Header/Header";
+import SectionHeading from "@/components/Section/SectionHeading";
+import { products } from '@/data/data'
+import SectionContent from "@/components/Section/SectionContent";
 
-export default function Home() {
+export default function Home({ tagheading = "" }) {
+
   return (
-    <>
-      He
-    </>
+    <section className="flex flex-col w-full gap-10 max-w-[1240px] mx-auto">
+      <div className="w-full max-h-[550px] relative">
+        <SectionHeading tagheading={"Today's"} heading={"Best Selling Products"} />
+        <SectionContent products={products} />
+      </div>
+    </section>
   );
 }

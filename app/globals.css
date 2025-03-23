@@ -3,6 +3,16 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Custom Scrollbar Styles */
 ::-webkit-scrollbar {
   width: 8px;
@@ -64,6 +74,15 @@
 }
 
 :root {
+  --quickcart-100: #cce4ff;
+  --quickcart-200: #99c9ff;
+  --quickcart-300: #66adff;
+  --quickcart-400: #3392ff;
+  --quickcart-500: #007bff; /* Primary */
+  --quickcart-600: #0066cc;
+  --quickcart-700: #0052a3;
+  --quickcart-800: #003d7a;
+  --quickcart-900: #002952;
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
@@ -163,4 +182,8 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+}
+
+html {
+  font-family: var(--font-inter), sans-serif;
 }

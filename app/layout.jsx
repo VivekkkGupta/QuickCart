@@ -1,20 +1,13 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Inter } from "next/font/google";
 import { APP_NAME, APP_DESCRIPTION } from "@/lib/constants/constants";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { SideBarMenu } from "@/components/SideBarMenu/SideBarMenu";
 import { AppContextProvider } from "@/contexts/AppContext";
+import TopHeader from "@/components/TopHeader/TopHeader";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata = {
   title: APP_NAME,
@@ -23,18 +16,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable}>
       <head>
         <link rel='icon' href='/images/logos/logo.svg' />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased suppressHydrationWarning`}
+        className={` antialiased suppressHydrationWarning`}
       >
         <AppContextProvider>
+          <TopHeader />
           <Header />
-          <div className="flex">
-            <SideBarMenu />
-            <main>
+          <div className="flex container w-full">
+            {/* <SideBarMenu /> */}
+            <main className="p-4 w-full ">
               {children}
             </main>
           </div>

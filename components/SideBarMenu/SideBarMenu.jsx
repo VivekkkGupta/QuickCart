@@ -68,6 +68,7 @@ export function SideBarMenu() {
                     onValueChange={setSelectedPriceRange}
                     className="my-4"
                 />
+
                 <div className="flex items-center justify-between text-sm">
                     <span>${selectedPriceRange[0]}</span>
                     <span>${selectedPriceRange[1]}</span>
