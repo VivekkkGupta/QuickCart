@@ -6,7 +6,7 @@ export default function Home({ tagheading = "" }) {
 
   return (
     <section className="flex flex-col w-full gap-10 max-w-[1240px] mx-auto">
-      <div className="w-full max-h-[550px] relative">
+      <div className="w-full  relative">
         <SectionHeading tagheading={"Today's"} heading={"Best Selling Products"} />
         <SectionContent products={products} />
       </div>

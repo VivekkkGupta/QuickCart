@@ -22,12 +22,24 @@ export const AppContextProvider = ({ children }) => {
         { name: "Category", path: "/category" }
     ]
 
+    const routesObject = {
+        "profile": { name: "Profile", path: "/profile" },
+        "orders": { name: "My Orders", path: "/profile/orders" },
+        "wishlist": { name: "Wishlist", path: "/profile/wishlist" },
+        "myreview": { name: "My Reviews", path: "/profile/myreviews" },
+        "cart": { name: "Cart", path: "/profile/cart" },
+        "sign-in": { name: "Sign In", path: "/sign-in" },
+        "sign-up": { name: "Sign Up", path: "/sign-up" },
+        "home": { name: "Home", path: "/" },
+
+    }
+
 
     const values = {
         selectedPriceRange, setSelectedPriceRange,
         selectedCategories, setSelectedCategories,
         selectedBrands, setSelectedBrands,
-        menuItems
+        menuItems, routesObject
     }
     return (
         <AppContext.Provider value={values}>

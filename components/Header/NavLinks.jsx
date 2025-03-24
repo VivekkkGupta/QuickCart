@@ -8,7 +8,7 @@ function NavLinks() {
     const { menuItems } = useAppContext()
     const pathname = usePathname();
     return (
-        <nav className='text-sm'>
+        <nav className='text-sm hidden md:block'>
             <ul className='flex gap-10'>
                 {
                     menuItems.map(({ name, path }, index) => (
