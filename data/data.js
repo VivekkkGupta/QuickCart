@@ -66,3 +66,49 @@ export const products = [
     slug: "mirrorless-camera",
   },
 ];
+
+export const wishList = [
+  {
+    id: 5,
+    image: "/dummyimage.png",
+    name: "Mirrorless Camera",
+    price: 1100,
+    discount: 18,
+    rating: 4.6,
+    reviews: 30,
+    slug: "mirrorless-camera",
+  },
+  {
+    id: 4,
+    image: "/dummyimage.png",
+    name: "4K OLED TV",
+    price: 1500,
+    discount: 25,
+    rating: 4.7,
+    reviews: 45,
+    slug: "4k-oled-tv",
+  },
+];
+
+export const cartList = [
+  {
+    id: 4,
+    image: "/dummyimage.png",
+    name: "4K OLED TV",
+    price: 1500,
+    discount: 25,
+    rating: 4.7,
+    reviews: 45,
+    slug: "4k-oled-tv",
+  },
+  {
+    id: 5,
+    image: "/dummyimage.png",
+    name: "Mirrorless Camera",
+    price: 1100,
+    discount: 18,
+    rating: 4.6,
+    reviews: 30,
+    slug: "mirrorless-camera",
+  },
+];

@@ -31,7 +31,6 @@ export const AppContextProvider = ({ children }) => {
         "sign-in": { name: "Sign In", path: "/sign-in" },
         "sign-up": { name: "Sign Up", path: "/sign-up" },
         "home": { name: "Home", path: "/" },
-
     }
 
 
