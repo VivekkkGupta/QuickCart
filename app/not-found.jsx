@@ -5,11 +5,11 @@ import Link from "next/link";
 function notfound() {
     return (
         <>
-            <div className="flex flex-col items-center justify-center h-screen w-full text-center gap-2">
-                <Image src="images/logos/logo.svg" alt="logo" width={60} height={60} />
+            <div className="flex flex-col items-center justify-center h-[70vh] w-full text-center gap-2">
+                <Image src="/images/logos/logo.svg" alt="logo" width={60} height={60} />
                 <div className="flex flex-col ">
 
-                    <h1 className="text-lg font-bold mt-4">Page Not found - {APP_NAME}</h1>
+                    <h1 className="text-4xl font-bold mt-10 mb-4 tracking-wider">404 Page Not found - {APP_NAME}</h1>
                     <p>
                         Go back to &nbsp;
                         <Link href="/" className="underline text-blue-500">
