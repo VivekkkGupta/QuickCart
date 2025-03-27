@@ -13,7 +13,7 @@ function Page() {
   };
 
   return (
-    <div className="max-w-[1240px] mx-auto w-full flex flex-col lg:flex-row gap-10 py-20">
+    <div className="max-w-[1240px] mx-auto w-full flex flex-col lg:flex-row gap-10 py-40">
       {/* Contact Info */}
       <div className="shadow-md w-full lg:w-1/3 flex p-6 items-center justify-center bg-white rounded-lg">
         <div className="flex flex-col gap-5 w-full">
@@ -43,8 +43,8 @@ function Page() {
       </div>
 
       {/* Contact Form */}
-      <div className="w-full lg:w-2/3 shadow-md rounded-lg flex items-center justify-center  py-4">
-        <form onSubmit={handleFormSubmit} className="flex flex-col gap-4 relative w-full px-4 ">
+      <div className="w-full lg:w-2/3 shadow-md rounded-lg flex items-center justify-center py-4">
+        <form onSubmit={handleFormSubmit} className="flex flex-col gap-8 relative w-full px-4">
           <div className="flex gap-3 flex-col md:flex-row">
             <Input
               type="text"
@@ -66,8 +66,8 @@ function Page() {
             />
           </div>
           <Textarea
-            placeholder="Message"
-            rows="4"
+            placeholder="Message *"
+            rows="10"
             className="w-full p-3 border border-gray-300 rounded-md"
             required
           ></Textarea>

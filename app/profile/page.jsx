@@ -1,11 +1,30 @@
 "use client";
 
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 
 const page = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    address: "",
+    currentPassword: "",
+    newPassword: "",
+    confirmNewPassword: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
   return (
     <div className="flex mx-auto max-w-[1240px]">
       {/* Sidebar */}
@@ -34,30 +53,79 @@ const page = () => {
             {/* Form Fields */}
             <div className="grid grid-cols-2 gap-6">
               <div>
-                <Label>First Name</Label>
-                <Input type="text" value="" placeholder="First name" className="bg-gray-100" />
+                <Label className={`mb-2`}>First Name</Label>
+                <Input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  placeholder="First name"
+                  className="bg-gray-100"
+                />
               </div>
               <div>
-                <Label>Last Name</Label>
-                <Input type="text" value="" placeholder="Last name" className="bg-gray-100" />
+                <Label className={`mb-2`}>Last Name</Label>
+                <Input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  placeholder="Last name"
+                  className="bg-gray-100"
+                />
               </div>
               <div>
-                <Label>Email</Label>
-                <Input type="email" value="" placeholder="Email" className="bg-gray-100" />
+                <Label className={`mb-2`}>Email</Label>
+                <Input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Email"
+                  className="bg-gray-100"
+                />
               </div>
               <div>
-                <Label>Address</Label>
-                <Input type="text" value="" placeholder="Address" className="bg-gray-100" />
+                <Label className={`mb-2`}>Address</Label>
+                <Input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  placeholder="Address"
+                  className="bg-gray-100"
+                />
               </div>
             </div>
 
             {/* Password Change Section */}
-            <div className="mt-6">
+            {/* <div className="mt-6">
               <h3 className="text-lg font-semibold">Password Changes</h3>
-              <Input type="password" placeholder="Current Password" className="mt-2" />
-              <Input type="password" placeholder="New Password" className="mt-2" />
-              <Input type="password" placeholder="Confirm New Password" className="mt-2" />
-            </div>
+              <Input
+                type="password"
+                name="currentPassword"
+                value={formData.currentPassword}
+                onChange={handleChange}
+                placeholder="Current Password"
+                className="mt-2"
+              />
+              <Input
+                type="password"
+                name="newPassword"
+                value={formData.newPassword}
+                onChange={handleChange}
+                placeholder="New Password"
+                className="mt-2"
+              />
+              <Input
+                type="password"
+                name="confirmNewPassword"
+                value={formData.confirmNewPassword}
+                onChange={handleChange}
+                placeholder="Confirm New Password"
+                className="mt-2"
+              />
+            </div> */}
 
             {/* Buttons */}
             <div className="flex items-center justify-end gap-4 mt-6">
