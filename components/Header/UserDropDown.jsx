@@ -45,12 +45,12 @@ const UserDropdown = ({ firstName, imageUrl }) => {
                             <span>My Orders</span>
                         </Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
+                    {/* <DropdownMenuItem asChild>
                         <Link href={routesObject['myreview'].path} className="flex gap-4 w-full">
                             <Star />
                             <span>My Reviews</span>
                         </Link>
-                    </DropdownMenuItem>
+                    </DropdownMenuItem> */}
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>

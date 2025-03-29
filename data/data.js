@@ -112,3 +112,25 @@ export const cartList = [
     slug: "mirrorless-camera",
   },
 ];
+
+
+export const UserAddress= [
+  {
+    "receiver": "John Doe",
+    "address1": "1234, 56th Street",
+    "address2": "Near ABC Park",
+    "city": "New York",
+    "state": "New York",
+    "pin": "10001",
+    "id": 1
+  },
+  {
+    "receiver": "Jane Doe",
+    "address1": "5678, 90th Street",
+    "address2": "Near XYZ Park",
+    "city": "Los Angeles",
+    "state": "California",
+    "pin": "90001",
+    "id": 2
+  }
+]
