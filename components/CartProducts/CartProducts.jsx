@@ -51,9 +51,9 @@ function CartProducts({ products }) {
                 ))}
             </TableBody>
             <TableFooter>
-                <TableRow>
+                <TableRow className={`h-8 text-lg`}>
                     <TableCell colSpan={3}>Total</TableCell>
-                    <TableCell className="text-right">
+                    <TableCell className="text-right ">
                         ₹{products.reduce((acc, product) => acc + product.price, 0)}
                     </TableCell>
                 </TableRow>
