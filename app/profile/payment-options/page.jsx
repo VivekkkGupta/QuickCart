@@ -6,10 +6,10 @@ import PersonalDetails from "@/components/ProfileComponents/PersonalDetails";
 const page = () => {
 
 
-  return (
-    <>
-      <PersonalDetails />
-    </>
-  )
+    return (
+        <>
+            <PersonalDetails />
+        </>
+    )
 }
 export default page;
