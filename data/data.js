@@ -134,3 +134,118 @@ export const UserAddress= [
     "id": 2
   }
 ]
+
+export const orderHistory = [
+  {
+    id: "ORD123456",
+    orderDate: "2024-03-25",
+    items: [
+      { name: "Wireless Mouse", quantity: 1, price: 1299 },
+      { name: "Mechanical Keyboard", quantity: 1, price: 3499 },
+    ],
+    totalAmount: 4798,
+    status: "Delivered",
+    paymentMethod: "Credit Card",
+  },
+  {
+    id: "ORD123457",
+    orderDate: "2024-03-22",
+    items: [
+      { name: "Gaming Headset", quantity: 1, price: 2499 },
+      { name: "USB-C Hub", quantity: 2, price: 999 },
+    ],
+    totalAmount: 4497,
+    status: "Shipped",
+    paymentMethod: "UPI",
+  },
+  {
+    id: "ORD123458",
+    orderDate: "2024-03-18",
+    items: [{ name: "Laptop Stand", quantity: 1, price: 1899 }],
+    totalAmount: 1899,
+    status: "Cancelled",
+    paymentMethod: "Net Banking",
+  },
+  {
+    id: "ORD123459",
+    orderDate: "2024-03-15",
+    items: [
+      { name: "Bluetooth Speaker", quantity: 1, price: 2999 },
+      { name: "USB-C Charger", quantity: 1, price: 1499 },
+    ],
+    totalAmount: 4498,
+    status: "Delivered",
+    paymentMethod: "Debit Card",
+  },
+  {
+    id: "ORD123460",
+    orderDate: "2024-03-10",
+    items: [{ name: "Smartwatch", quantity: 1, price: 5999 }],
+    totalAmount: 5999,
+    status: "Returned",
+    paymentMethod: "Cash on Delivery",
+  },
+];
+
+
+export const returnsHistory = [
+  {
+    id: "RET123456",
+    returnDate: "2024-03-25",
+    items: [
+      { name: "Wireless Mouse", quantity: 1, price: 1299, image: "/mouse.png" },
+      { name: "Mechanical Keyboard", quantity: 1, price: 3499, image: "/keyboard.png" },
+    ],
+    totalAmount: 4798,
+    status: "Refunded",
+    paymentMethod: "Credit Card",
+  },
+  {
+    id: "RET123457",
+    returnDate: "2024-03-22",
+    items: [
+      { name: "Gaming Headset", quantity: 1, price: 2499, image: "/headset.png" },
+      { name: "USB-C Hub", quantity: 2, price: 999, image: "/hub.png" },
+    ],
+    totalAmount: 4497,
+    status: "Processing",
+    paymentMethod: "UPI",
+  },
+  {
+    id: "RET123458",
+    returnDate: "2024-03-18",
+    items: [{ name: "Laptop Stand", quantity: 1, price: 1899, image: "/stand.png" }],
+    totalAmount: 1899,
+    status: "Rejected",
+    paymentMethod: "Net Banking",
+  },
+  {
+    id: "RET123459",
+    returnDate: "2024-03-15",
+    items: [
+      { name: "Bluetooth Speaker", quantity: 1, price: 2999, image: "/speaker.png" },
+      { name: "USB-C Charger", quantity: 1, price: 1499, image: "/charger.png" },
+    ],
+    totalAmount: 4498,
+    status: "Refunded",
+    paymentMethod: "Debit Card",
+  },
+  {
+    id: "RET123460",
+    returnDate: "2024-03-10",
+    items: [{ name: "Smartwatch", quantity: 1, price: 5999, image: "/smartwatch.png" }],
+    totalAmount: 5999,
+    status: "Pending",
+    paymentMethod: "Cash on Delivery",
+  },
+];
+
+export const personalDetails = [
+  {
+    firstName: "Rahul",
+    lastName: "Sharma",
+    email: "rahul.sharma@example.com",
+    phone: "+91 9876543210",
+  }
+];
+

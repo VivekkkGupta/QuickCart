@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
         <div className="w-full h-full">
             <div className="flex mx-auto max-w-[1240px] gap-10">
                 {/* Sidebar */}
-                <div className="w-1/4 p-10 drop-shadow-lg rounded-lg border h-full sticky top-5">
+                <div className="w-1/4 p-10 drop-shadow-lg rounded-lg border h-full sticky top-5 hidden md:block">
                     <h2 className="font-semibold text-lg mb-4">Manage My Account</h2>
                     <ul className="space-y-2 pl-8 text-sm">
                         <li>
@@ -28,19 +28,19 @@ const Layout = ({ children }) => {
                         <li>
                             <Link
                                 href={routesObject.address.path}
-                                className={`${currentTab === "address" ? "text-red-500" : "text-gray-500 hover:text-gray-700"} font-medium cursor-pointer`}
+                                className={`${currentTab === "address-details" ? "text-red-500" : "text-gray-500 hover:text-gray-700"} font-medium cursor-pointer`}
                             >
                                 Address Book
                             </Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <Link
                                 href={routesObject.payment.path}
-                                className={`${currentTab === "payment" ? "text-red-500" : "text-gray-500 hover:text-gray-700"} font-medium cursor-pointer`}
+                                className={`${currentTab === "payment-options" ? "text-red-500" : "text-gray-500 hover:text-gray-700"} font-medium cursor-pointer`}
                             >
                                 Payment Options
                             </Link>
-                        </li>
+                        </li> */}
                     </ul>
 
                     <h2 className="font-semibold text-lg mt-6 mb-2">Orders</h2>
@@ -48,7 +48,7 @@ const Layout = ({ children }) => {
                         <li>
                             <Link
                                 href={routesObject.orders.path}
-                                className={`${currentTab === "orders" ? "text-red-500" : "text-gray-500 hover:text-gray-700"} font-medium cursor-pointer`}
+                                className={`${currentTab === "orders-history" ? "text-red-500" : "text-gray-500 hover:text-gray-700"} font-medium cursor-pointer`}
                             >
                                 Orders
                             </Link>
@@ -56,7 +56,7 @@ const Layout = ({ children }) => {
                         <li>
                             <Link
                                 href={routesObject.returns.path}
-                                className={`${currentTab === "returns" ? "text-red-500" : "text-gray-500 hover:text-gray-700"} font-medium cursor-pointer`}
+                                className={`${currentTab === "return-history" ? "text-red-500" : "text-gray-500 hover:text-gray-700"} font-medium cursor-pointer`}
                             >
                                 Returns
                             </Link>
