@@ -1,14 +1,16 @@
 'use client'
 
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ProductCard from '@/components/ProductCard/ProductCard';
 
-function SectionContent({ products }) {
+function SectionContent({ listOfProducts }) {
+
+    const [products,setProducts] = useState(listOfProducts)
 
     const scrollRef = useRef(null);
-    const scroll = (direction) => {
+    const scroll = (direction) => {   
         if (scrollRef.current) {
             const scrollAmount = 300; // Scroll distance
             if (direction === "left") {
@@ -18,6 +20,7 @@ function SectionContent({ products }) {
             }
         }
     };
+
     return (
         <div className="relative">
             {/* Left Scroll Button */}
@@ -44,7 +47,7 @@ function SectionContent({ products }) {
                         productdiscount={product.discount}
                         productrating={product.rating}
                         productreviewscount={product.reviews}
-                        productslug={product.slug}
+                        productslug={`${product.category}/${product.slug}`}
                     />
                 ))}
             </div>

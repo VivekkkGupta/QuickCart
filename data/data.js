@@ -14,58 +14,69 @@ export const brands = [
   { id: "sony", label: "Sony" },
 ];
 
-export const products = [
+export const productsForHomePage = [
   {
-    id: 1,
-    image: "/dummyimage.png",
-    name: "Gaming Laptop",
-    price: 1200,
-    discount: 20,
-    rating: 4.5,
-    reviews: 35,
-    slug: "gaming-laptop",
+    "id": 1,
+    "image": "https://source.unsplash.com/400x300/?laptop,gaming",
+    "name": "Gaming Laptop",
+    "price": 1200,
+    "discount": 20,
+    "rating": 4.5,
+    "reviews": 35,
+    "category": "Electronics",
+    "tags": ["Gaming", "Laptop", "High Performance"],
+    "slug": "gaming-laptop"
   },
   {
-    id: 2,
-    image: "/dummyimage.png",
-    name: "Smartphone Pro",
-    price: 800,
-    discount: 10,
-    rating: 4.8,
-    reviews: 50,
-    slug: "smartphone-pro",
+    "id": 2,
+    "image": "https://source.unsplash.com/400x300/?smartphone,technology",
+    "name": "Smartphone Pro",
+    "price": 800,
+    "discount": 10,
+    "rating": 4.8,
+    "reviews": 50,
+    "category": "Electronics",
+    "tags": ["Smartphone", "5G", "Android"],
+    "slug": "smartphone-pro"
   },
   {
-    id: 3,
-    image: "/dummyimage.png",
-    name: "Wireless Headphones",
-    price: 250,
-    discount: 15,
-    rating: 4.2,
-    reviews: 20,
-    slug: "wireless-headphones",
+    "id": 3,
+    "image": "https://source.unsplash.com/400x300/?headphones,music",
+    "name": "Wireless Headphones",
+    "price": 250,
+    "discount": 15,
+    "rating": 4.2,
+    "reviews": 20,
+    "category": "Accessories",
+    "tags": ["Headphones", "Wireless", "Noise Cancelling"],
+    "slug": "wireless-headphones"
   },
   {
-    id: 4,
-    image: "/dummyimage.png",
-    name: "4K OLED TV",
-    price: 1500,
-    discount: 25,
-    rating: 4.7,
-    reviews: 45,
-    slug: "4k-oled-tv",
+    "id": 4,
+    "image": "https://source.unsplash.com/400x300/?television,entertainment",
+    "name": "4K OLED TV",
+    "price": 1500,
+    "discount": 25,
+    "rating": 4.7,
+    "reviews": 45,
+    "category": "Home Appliances",
+    "tags": ["TV", "4K", "OLED"],
+    "slug": "4k-oled-tv"
   },
   {
-    id: 5,
-    image: "/dummyimage.png",
-    name: "Mirrorless Camera",
-    price: 1100,
-    discount: 18,
-    rating: 4.6,
-    reviews: 30,
-    slug: "mirrorless-camera",
-  },
+    "id": 5,
+    "image": "https://source.unsplash.com/400x300/?camera,photography",
+    "name": "Mirrorless Camera",
+    "price": 1100,
+    "discount": 18,
+    "rating": 4.6,
+    "reviews": 30,
+    "category": "Cameras",
+    "tags": ["Photography", "Mirrorless", "DSLR"],
+    "slug": "mirrorless-camera"
+  }
 ];
+
 
 export const wishList = [
   {
@@ -248,4 +259,36 @@ export const personalDetails = [
     phone: "+91 9876543210",
   }
 ];
+
+export const productDetails = [{
+  "id": 1,
+  "name": "Gaming Laptop",
+  "price": 1200,
+  "discount": 20,
+  "rating": 4.5,
+  "reviews": 35,
+  "category": "Electronics",
+  "tags": ["Gaming", "Laptop", "High Performance"],
+  "slug": "gaming-laptop",
+  "description": "A high-performance gaming laptop featuring an Intel i7 13th Gen processor, 16GB RAM, and an RTX 4060 GPU. Ideal for gamers and professionals.",
+  "specifications": {
+    "Processor": "Intel i7 13th Gen",
+    "RAM": "16GB DDR5",
+    "Storage": "1TB SSD",
+    "GPU": "NVIDIA RTX 4060",
+    "Display": "15.6-inch 144Hz",
+    "Battery Life": "8 hours"
+  },
+  "images": [
+"/dummyimage.png",
+"/hp-pav.jpg",
+"/tuf-gaming.jpg", 
+"/dummyimage.png",
+"/hp-pav.jpg",
+"/tuf-gaming.jpg", 
+],
+  "stockAvailability": 10,
+  "colors": ["Black", "Silver"],
+  "sizes": ["15.6-inch", "17-inch"]
+}];
 

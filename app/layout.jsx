@@ -14,6 +14,7 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -44,6 +45,7 @@ export default function RootLayout({ children }) {
             </div>
             <Footer />
           </AppContextProvider>
+          <Toaster richColors   />
         </body>
       </html>
     </ClerkProvider>
