@@ -76,6 +76,19 @@ export const productsForHomePage = [
     "slug": "mirrorless-camera"
   }
 ];
+//http://localhost:1337/api/products`
+// [{
+//   "id": 17,
+//   "documentId": "bnt253wxxvb2r2wtn8kfjbu2",
+//   "ProductName": "MAC",
+//   "slug": "mac",
+//   "ProductDescription": "dvsfdds",
+//   "ProductPrice": "3123122321",
+//   "ProductStock": 1,
+//   "createdAt": "2025-03-22T17:12:34.015Z",
+//   "updatedAt": "2025-03-22T17:12:34.015Z",
+//   "publishedAt": "2025-03-22T17:12:34.036Z"
+//   }]
 
 
 export const wishList = [
@@ -263,22 +276,14 @@ export const personalDetails = [
 export const productDetails = [{
   "id": 1,
   "name": "Gaming Laptop",
+  "description": "A high-performance gaming laptop featuring an Intel i7 13th Gen processor, 16GB RAM, and an RTX 4060 GPU. Ideal for gamers and professionals.",
+  "slug": "gaming-laptop",
   "price": 1200,
   "discount": 20,
-  "rating": 4.5,
-  "reviews": 35,
+  "rating": 4.5,//dynamcially fetched from api
+  "reviews": 35,//dynamcially fetched from api
   "category": "Electronics",
   "tags": ["Gaming", "Laptop", "High Performance"],
-  "slug": "gaming-laptop",
-  "description": "A high-performance gaming laptop featuring an Intel i7 13th Gen processor, 16GB RAM, and an RTX 4060 GPU. Ideal for gamers and professionals.",
-  "specifications": {
-    "Processor": "Intel i7 13th Gen",
-    "RAM": "16GB DDR5",
-    "Storage": "1TB SSD",
-    "GPU": "NVIDIA RTX 4060",
-    "Display": "15.6-inch 144Hz",
-    "Battery Life": "8 hours"
-  },
   "images": [
 "/dummyimage.png",
 "/hp-pav.jpg",
@@ -287,8 +292,64 @@ export const productDetails = [{
 "/hp-pav.jpg",
 "/tuf-gaming.jpg", 
 ],
-  "stockAvailability": 10,
+"stockAvailability": 10,
+  "specifications": {
+    "Processor": "Intel i7 13th Gen",
+    "RAM": "16GB DDR5",
+    "Storage": "1TB SSD",
+    "GPU": "NVIDIA RTX 4060",
+    "Display": "15.6-inch 144Hz",
+    "Battery Life": "8 hours"
+  },
   "colors": ["Black", "Silver"],
   "sizes": ["15.6-inch", "17-inch"]
 }];
 
+//http://localhost:1337/api/products?populate=*
+//need to add according to the product page
+// [
+//   {
+//     "id": 9,
+//     "documentId": "rjosm2x6jctlhxsnz94qrkee",
+//     "ProductName": "iphone 15",
+//     "slug": "iphone-15",
+//     "ProductDescription": "asdadawdwa",
+//     "ProductPrice": "1234",
+//     "ProductStock": 3,
+//     "createdAt": "2025-03-22T12:41:05.631Z",
+//     "updatedAt": "2025-03-22T12:41:05.631Z",
+//     "publishedAt": "2025-03-22T12:41:05.642Z",
+//     "product_category": {},
+//     "ProductImage": [],
+//     "product_sub_categories": []
+//   }
+// ]
+
+
+
+//PRoduct categories api
+// http://localhost:1337/api/product-categories/
+// [
+//   {
+//     "id": 10,
+//     "documentId": "a74lzhzm3w8vhzkhtob8sfyl",
+//     "CategoryName": "Books",
+//     "createdAt": "2025-03-22T13:04:26.200Z",
+//     "updatedAt": "2025-03-22T13:04:58.358Z",
+//     "publishedAt": "2025-03-22T13:04:58.375Z",
+//     "slug": "books"
+//     },
+// ]
+
+
+//to get specific category products
+// http://localhost:1337/api/product-categories?filters[CategoryName][$eq]=Books
+// [{
+// "id": 10,
+// "documentId": "a74lzhzm3w8vhzkhtob8sfyl",
+// "CategoryName": "Books",
+// "createdAt": "2025-03-22T13:04:26.200Z",
+// "updatedAt": "2025-03-22T13:04:58.358Z",
+// "publishedAt": "2025-03-22T13:04:58.375Z",
+// "slug": "books"
+// }]
