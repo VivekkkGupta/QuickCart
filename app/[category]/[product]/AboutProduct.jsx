@@ -3,13 +3,14 @@
 import StarReviews from "@/components/ProductCard/StarReviews";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { HeartIcon, Minus, Plus, Recycle, ShoppingBasket, ShoppingCart, ShoppingCartIcon, Truck } from "lucide-react";
+import { HeartIcon, Minus, Plus, Recycle, ShoppingCartIcon, Truck } from "lucide-react";
 import { toast } from "sonner";
 
 const AboutProduct = ({ currentproduct }) => {
   const InStock = currentproduct.stockAvailability > 0;
   const [countBuyProduct, setCountBuyProduct] = useState(0);
-  const [selectedSize,set]
+  const [selectedSize,setSelectedSize] = useState(currentproduct.sizes[0] || "")
+  const [selectedColor,setSelectedColor] = useState(currentproduct.colors[0] || "")
 
   const handleCountBuyProduct = (e) => {
     if (e.target.name === "increment") {
@@ -30,7 +31,6 @@ const handleAddToCart = (e) =>{
     console.log("Added to Cart")
 }
 const handleAddToWishlist = (e)=>{
-
     console.log("Added to WishList")
   }
 
@@ -49,7 +49,8 @@ const handleAddToWishlist = (e)=>{
           <span className="text-sm text-red-500">Out of Stock</span>
         )}
       </div>
-      <p className="text-gray-500">{currentproduct.description}</p>
+      <p className="text-gray-500 text-sm">{currentproduct.description}</p>
+      
       {/* Colors */}
       {currentproduct.colors && (
         <div className="flex items-center gap-2 flex-wrap">
@@ -58,7 +59,8 @@ const handleAddToWishlist = (e)=>{
             <span
               key={index}
               style={{ backgroundColor: color }}
-              className="rounded-full h-6 w-6 border"
+              className={`rounded-full h-6 w-6 border cursor-pointer ${selectedColor === color ? "border-2 border-gray-500": ""}`}
+              onClick={()=>setSelectedColor(color)}
             ></span>
           ))}
         </div>
@@ -69,7 +71,9 @@ const handleAddToWishlist = (e)=>{
         <div className="flex items-center gap-2 flex-wrap">
           <h3>Size:</h3>
           {currentproduct.sizes.map((size, index) => (
-            <span key={index} className="rounded-md px-3 py-1 border">
+            <span key={index} className={`rounded-md px-3 py-1 border cursor-pointer ${selectedSize === size ? "border-2 border-gray-500": ""}`}
+            onClick={()=>setSelectedSize(size)}
+            >
               {size}
             </span>
           ))}
