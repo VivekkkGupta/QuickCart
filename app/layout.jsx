@@ -26,7 +26,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-      <html lang="en" className={inter.variable}>
+      <html lang="en" className={inter.variable} suppressHydrationWarning>
         <head>
           <link rel='icon' href='/images/logos/logo.svg' />
         </head>
