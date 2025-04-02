@@ -74,6 +74,78 @@ export const productsForHomePage = [
     "category": "Cameras",
     "tags": ["Photography", "Mirrorless", "DSLR"],
     "slug": "mirrorless-camera"
+  },
+  {
+    "id": 6,
+    "image": "https://source.unsplash.com/400x300/?camera,photography",
+    "name": "Mirrorless Camera",
+    "price": 1100,
+    "discount": 18,
+    "rating": 4.6,
+    "reviews": 30,
+    "category": "Cameras",
+    "tags": ["Photography", "Mirrorless", "DSLR"],
+    "slug": "mirrorless-camera"
+  },
+  {
+    "id": 7,
+    "image": "https://source.unsplash.com/400x300/?camera,photography",
+    "name": "Mirrorless Camera",
+    "price": 1100,
+    "discount": 18,
+    "rating": 4.6,
+    "reviews": 30,
+    "category": "Cameras",
+    "tags": ["Photography", "Mirrorless", "DSLR"],
+    "slug": "mirrorless-camera"
+  },
+  {
+    "id": 8,
+    "image": "https://source.unsplash.com/400x300/?camera,photography",
+    "name": "Mirrorless Camera",
+    "price": 1100,
+    "discount": 18,
+    "rating": 4.6,
+    "reviews": 30,
+    "category": "Cameras",
+    "tags": ["Photography", "Mirrorless", "DSLR"],
+    "slug": "mirrorless-camera"
+  },
+  {
+    "id": 9,
+    "image": "https://source.unsplash.com/400x300/?camera,photography",
+    "name": "Mirrorless Camera",
+    "price": 1100,
+    "discount": 18,
+    "rating": 4.6,
+    "reviews": 30,
+    "category": "Cameras",
+    "tags": ["Photography", "Mirrorless", "DSLR"],
+    "slug": "mirrorless-camera"
+  },
+  {
+    "id": 10,
+    "image": "https://source.unsplash.com/400x300/?camera,photography",
+    "name": "Mirrorless Camera",
+    "price": 1100,
+    "discount": 18,
+    "rating": 4.6,
+    "reviews": 30,
+    "category": "Cameras",
+    "tags": ["Photography", "Mirrorless", "DSLR"],
+    "slug": "mirrorless-camera"
+  },
+  {
+    "id": 11,
+    "image": "https://source.unsplash.com/400x300/?camera,photography",
+    "name": "Mirrorless Camera",
+    "price": 1100,
+    "discount": 18,
+    "rating": 4.6,
+    "reviews": 30,
+    "category": "Cameras",
+    "tags": ["Photography", "Mirrorless", "DSLR"],
+    "slug": "mirrorless-camera"
   }
 ];
 

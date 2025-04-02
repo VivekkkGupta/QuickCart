@@ -1,6 +1,6 @@
+'use client'
 
 import React from 'react'
-
 import { Button } from "@/components/ui/button"
 import {
     Card,
@@ -11,7 +11,6 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import Image from 'next/image'
-import { Input } from '../ui/input'
 import { Heart } from 'lucide-react'
 import Price from './Price'
 import StarReviews from './StarReviews'
@@ -20,9 +19,9 @@ import Link from 'next/link'
 function ProductCard({ productimagesrc = "/dummyimage.png", productname = "dummy", productprice = 100, productdiscount = 10, productrating = 3.5, productreviewscount = 0, productslug = "", }) {
     return (
         <Link href={productslug} className='cursor-pointer'>
-            <Card className="w-[300px]">
+            <Card className="w-full md:w-[300px]">
                 <CardContent>
-                    <div className="w-[250px] h-[250px] bg-gray-500 flex items-center justify-center">
+                    <div className="md:w-[250px] md:h-[250px] bg-gray-500 flex items-center justify-center">
                         <Image src={productimagesrc} width={250} height={250} alt={productslug} />
                     </div>
                 </CardContent>

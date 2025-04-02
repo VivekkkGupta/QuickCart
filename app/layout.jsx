@@ -3,18 +3,10 @@ import { Inter } from "next/font/google";
 import { APP_NAME, APP_DESCRIPTION } from "@/lib/constants/constants";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import { SideBarMenu } from "@/components/SideBarMenu/SideBarMenu";
-import { AppContextProvider } from "@/contexts/AppContext";
 import TopHeader from "@/components/TopHeader/TopHeader";
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
 import { Toaster } from "@/components/ui/sonner";
+import { Providers } from "./providers";
+
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -25,29 +17,24 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
+    <Providers>
       <html lang="en" className={inter.variable}>
         <head>
-          <link rel='icon' href='/images/logos/logo.svg' />
+          <link rel="icon" href="/images/logos/logo.svg" />
         </head>
-        <body
-          className={` antialiased suppressHydrationWarning`}
-        >
-          <AppContextProvider>
-            <TopHeader />
-            <Header />
-
-            <div className="flex container w-full">
-              {/* <SideBarMenu /> */}
-              <main className="p-4 w-full ">
-                {children}
-              </main>
-            </div>
-            <Footer />
-          </AppContextProvider>
-          <Toaster richColors   />
+        <body className={` antialiased suppressHydrationWarning`}>
+          
+          {/* For role = End User */}
+          <TopHeader />
+          <Header />
+          <div className="flex container w-full">
+            <main className="p-4 w-full ">{children}</main>
+          </div>
+          <Footer />
+          
+          <Toaster richColors />
         </body>
       </html>
-    </ClerkProvider>
+    </Providers>
   );
 }

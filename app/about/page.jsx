@@ -1,4 +1,3 @@
-import PromotionCard from '@/components/PromotionCard/PromotionCard'
 import { CircleDollarSign, Headset, IndianRupee, ShieldCheck, ShieldCheckIcon, ShoppingBag, Store, Truck } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'

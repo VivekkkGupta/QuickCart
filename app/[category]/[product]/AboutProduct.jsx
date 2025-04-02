@@ -3,14 +3,25 @@
 import StarReviews from "@/components/ProductCard/StarReviews";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { HeartIcon, Minus, Plus, Recycle, ShoppingCartIcon, Truck } from "lucide-react";
+import {
+  HeartIcon,
+  Minus,
+  Plus,
+  Recycle,
+  ShoppingCartIcon,
+  Truck,
+} from "lucide-react";
 import { toast } from "sonner";
 
 const AboutProduct = ({ currentproduct }) => {
   const InStock = currentproduct.stockAvailability > 0;
   const [countBuyProduct, setCountBuyProduct] = useState(0);
-  const [selectedSize,setSelectedSize] = useState(currentproduct.sizes[0] || "")
-  const [selectedColor,setSelectedColor] = useState(currentproduct.colors[0] || "")
+  const [selectedSize, setSelectedSize] = useState(
+    currentproduct.sizes[0] || ""
+  );
+  const [selectedColor, setSelectedColor] = useState(
+    currentproduct.colors[0] || ""
+  );
 
   const handleCountBuyProduct = (e) => {
     if (e.target.name === "increment") {
@@ -27,12 +38,12 @@ const AboutProduct = ({ currentproduct }) => {
       setCountBuyProduct((prev) => prev - 1);
   };
 
-const handleAddToCart = (e) =>{
-    console.log("Added to Cart")
-}
-const handleAddToWishlist = (e)=>{
-    console.log("Added to WishList")
-  }
+  const handleAddToCart = (e) => {
+    console.log("Added to Cart");
+  };
+  const handleAddToWishlist = (e) => {
+    console.log("Added to WishList");
+  };
 
   return (
     <div className="flex flex-col w-full md:w-1/2 space-y-4">
@@ -50,7 +61,7 @@ const handleAddToWishlist = (e)=>{
         )}
       </div>
       <p className="text-gray-500 text-sm">{currentproduct.description}</p>
-      
+
       {/* Colors */}
       {currentproduct.colors && (
         <div className="flex items-center gap-2 flex-wrap">
@@ -59,8 +70,10 @@ const handleAddToWishlist = (e)=>{
             <span
               key={index}
               style={{ backgroundColor: color }}
-              className={`rounded-full h-6 w-6 border cursor-pointer ${selectedColor === color ? "border-2 border-gray-500": ""}`}
-              onClick={()=>setSelectedColor(color)}
+              className={`rounded-full h-6 w-6 border cursor-pointer ${
+                selectedColor === color ? "border-2 border-gray-500" : ""
+              }`}
+              onClick={() => setSelectedColor(color)}
             ></span>
           ))}
         </div>
@@ -71,8 +84,12 @@ const handleAddToWishlist = (e)=>{
         <div className="flex items-center gap-2 flex-wrap">
           <h3>Size:</h3>
           {currentproduct.sizes.map((size, index) => (
-            <span key={index} className={`rounded-md px-3 py-1 border cursor-pointer ${selectedSize === size ? "border-2 border-gray-500": ""}`}
-            onClick={()=>setSelectedSize(size)}
+            <span
+              key={index}
+              className={`rounded-md px-3 py-1 border cursor-pointer ${
+                selectedSize === size ? "border-2 border-gray-500" : ""
+              }`}
+              onClick={() => setSelectedSize(size)}
             >
               {size}
             </span>
@@ -92,8 +109,14 @@ const handleAddToWishlist = (e)=>{
           </Button>
         </div>
         <Button className="bg-red-400 text-white px-6">Buy Now</Button>
-        <ShoppingCartIcon className="cursor-pointer" onClick={handleAddToCart}/>
-        <HeartIcon className="cursor-pointer text-red-400" onClick={handleAddToWishlist}/>
+        <ShoppingCartIcon
+          className="cursor-pointer"
+          onClick={handleAddToCart}
+        />
+        <HeartIcon
+          className="cursor-pointer text-red-400"
+          onClick={handleAddToWishlist}
+        />
       </div>
 
       {/* Delivery & Returns */}
