@@ -8,42 +8,34 @@ import Price from "./Price";
 import StarReviews from "./StarReviews";
 import Link from "next/link";
 import { toast } from "sonner";
+import { useAppContext } from "@/contexts/AppContext";
 
 // function ProductCard({ productimagesrc = "/dummyimage.png", productname = "dummy", productdescription="a sample product" productprice = 100, productdiscount = 10, productrating = 3.5, productreviewscount = 0, productslug = "", }) {
 function ProductCard({ product }) {
   if (!product) return null; // Handle missing product
 
-  // const {
-  //   image = "/placeholder.png",
-  //   name = "Unnamed Product",
-  //   price = 0,
-  //   discount = 0,
-  //   rating = 0,
-  //   reviews = 0,
-  //   category = "misc",
-  //   slug = "unknown",
-  // } = product;
-
   const slugUrl = `/${product.category}/${product.slug}`;
 
-  const handleAddToCart = (e,product) => {
-    e.stopPropagation();
-    e.preventDefault();
-    toast.success("Product Added to Cart")
-    //Api Call to add to cart
+  const { handleAddToCart } = useAppContext();
+
+  const handleCart = async (e, product) => {
+    await handleAddToCart(product);
   };
 
   return (
-    <Link href={slugUrl}>
-      <div className="relative flex flex-col w-full md:max-w-[250px] p-2 ">
-        <div 
-        onClick={(e) => handleAddToCart(e, product)}
-        className="absolute w-5 h-5 md:w-7 md:h-7 flex items-center justify-center rounded-full p-1 md:p-2 bg-white shadow shadow-gray-500 right-2 top-2">
-          <Heart />
-        </div>
-        <button
-          className="flex items-center justify-center"
-        >
+    <div className="relative z-0 flex flex-col w-full md:max-w-[250px] p-2 ">
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          handleCart(e, product);
+        }}
+        className="absolute z-10 w-5 h-5 md:w-7 md:h-7 flex items-center justify-center rounded-full p-1 md:p-2 bg-white shadow shadow-gray-500 right-2 top-2"
+      >
+        <Heart />
+      </div>
+      <Link href={slugUrl}>
+        <button className="flex items-center justify-center">
           <Image
             src={product.image}
             width={500}
@@ -67,8 +59,8 @@ function ProductCard({ product }) {
             </button>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 

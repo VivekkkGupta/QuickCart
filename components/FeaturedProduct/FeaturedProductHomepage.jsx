@@ -23,7 +23,7 @@ const products = [
   },
 ];
 
-const FeaturedProduct = () => {
+const FeaturedProductHomepage = () => {
   return (
     <div className="mt-14">
       <div className="flex flex-col items-center">
@@ -51,8 +51,9 @@ const FeaturedProduct = () => {
           </div>
         ))}
       </div>
+
     </div>
   );
 };
 
-export default FeaturedProduct;
+export default FeaturedProductHomepage;

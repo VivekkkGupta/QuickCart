@@ -2,7 +2,7 @@ import SectionHeading from "@/components/Section/SectionHeading";
 import { productsForHomePage } from '@/data/data'
 import SectionContent from "@/components/Section/SectionContent";
 import HeaderSlider from "@/components/HeaderSlider/HeaderSlider";
-import FeaturedProduct from "@/components/FeaturedProduct/FeaturedProduct";
+import FeaturedProductHomepage from "@/components/FeaturedProduct/FeaturedProductHomepage";
 
 export default function page() {
 
@@ -12,7 +12,7 @@ export default function page() {
         <HeaderSlider/> 
         <SectionHeading tagheading={"Today's"} heading={"Best Selling Products"}/>
         <SectionContent listOfProducts={productsForHomePage} />
-        <FeaturedProduct />
+        <FeaturedProductHomepage/>
       </div>
     </section>
   );

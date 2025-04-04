@@ -1,5 +1,6 @@
 'use client'
 
+import SectionHeading from "@/components/Section/SectionHeading";
 import { Button } from "@/components/ui/button";
 import { CameraIcon, Computer, Gamepad, Headset, Phone, Smartphone } from "lucide-react";
 import React from "react";
@@ -41,10 +42,8 @@ function page() {
   return (
     <div className="flex max-w-[1240px] mx-auto w-full  flex-col gap-5 py-20">
       <div className="flex flex-col w-full">
-        <div className="flex text-pink-700 font-bold">
-          <span className="bg-pink-600 rounded-sm h-6 w-3"></span>
-          <span className="ml-4 capitalize"><h1>Categories</h1></span>
-        </div>
+        
+        <SectionHeading tagheading="category" heading=""/>
         <div className="flex items-center justify-between">
           <h2 className="my-4 mb-4 font-extrabold tracking-wide text-900 text-3xl capitalize">
             All Categories

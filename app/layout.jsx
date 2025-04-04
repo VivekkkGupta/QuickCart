@@ -22,16 +22,15 @@ export default function RootLayout({ children }) {
         <head>
           <link rel="icon" href="/images/logos/logo.svg" />
         </head>
-        <body className={` antialiased suppressHydrationWarning`}>
+        <body className={` antialiased `}>
           
           {/* For role = End User */}
           <TopHeader />
           <Header />
           <div className="flex container w-full">
-            <main className="p-4 w-full ">{children}</main>
+            <main className="p-4 w-full max-w-[1240px] mx-auto">{children}</main>
           </div>
           <Footer />
-          
           <Toaster richColors />
         </body>
       </html>

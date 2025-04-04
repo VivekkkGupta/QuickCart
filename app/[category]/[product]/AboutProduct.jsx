@@ -14,9 +14,12 @@ import {
 import { toast } from "sonner";
 import Price from "@/components/ProductCard/Price";
 import { Separator } from "@/components/ui/separator";
+import { useAppContext } from "@/contexts/AppContext";
 
 const AboutProduct = ({ currentproduct }) => {
   const InStock = currentproduct.stockAvailability > 0;
+
+  const {handleAddToCart} = useAppContext()
 
   const [countBuyProduct, setCountBuyProduct] = useState(0);
   const [selectedSize, setSelectedSize] = useState(
@@ -41,8 +44,8 @@ const AboutProduct = ({ currentproduct }) => {
       setCountBuyProduct((prev) => prev - 1);
   };
 
-  const handleAddToCart = (e) => {
-    console.log("Added to Cart");
+  const handleCart = async (product) => {
+    await handleAddToCart(product);
   };
   const handleAddToWishlist = (e) => {
     console.log("Added to WishList");
@@ -128,7 +131,7 @@ const AboutProduct = ({ currentproduct }) => {
         {/* Add to cart and buy now button */}
         <div className="w-full flex gap-2 items-center justify-between">
           <button
-            onClick={handleAddToCart}
+            onClick={()=>handleCart(currentproduct)}
             className="flex items-center justify-center gap-2 bg-transparent border rounded-sm w-full py-4  cursor-pointer hover:bg-gray-200 transition-all duration-300"
           >
             Add to Cart

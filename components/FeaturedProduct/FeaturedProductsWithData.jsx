@@ -1,5 +1,6 @@
 import React from "react";
 import ProductCard from "../ProductCard/ProductCard";
+import Link from "next/link";
 
 function FeaturedProductsWithData({ heading = "Featured Products", products}) {
     const headingName = heading.split()
@@ -16,9 +17,11 @@ function FeaturedProductsWithData({ heading = "Featured Products", products}) {
           <ProductCard key={index} product={product} />
         ))}
       </div>
-      <button className="px-8 py-2 mb-16 border rounded text-gray-500/70 hover:bg-slate-50/90 transition">
-        See more
-      </button>
+      <Link href={`/all-products`}>
+        <button className="px-8 py-2 mb-16 border-2 rounded text-gray-500/90 hover:bg-slate-50/90 transition cursor-pointer">
+          See more
+        </button>
+      </Link>
     </div>
   );
 }
