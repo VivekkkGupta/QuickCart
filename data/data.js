@@ -16,139 +16,123 @@ export const brands = [
 
 export const productsForHomePage = [
   {
-    "id": 1,
-    "image": "https://source.unsplash.com/400x300/?laptop,gaming",
-    "name": "Gaming Laptop",
-    "price": 1200,
-    "discount": 20,
-    "rating": 4.5,
-    "reviews": 35,
-    "category": "Electronics",
-    "tags": ["Gaming", "Laptop", "High Performance"],
-    "slug": "gaming-laptop"
+    _id: "67a1f7c93f34a77b6dde915a",
+    name: "MacBook Pro 16",
+    description:
+      "The MacBook Pro 16, powered by Apple's M2 Pro chip, offers outstanding performance with 16GB RAM and a 512GB SSD. Whether you're editing high-resolution video, developing software, or multitasking with ease, this laptop can handle the toughest tasks. It features a stunning Retina display with True Tone technology, making it a top choice for professionals in creative industries or anyone who demands premium performance in a portable form.",
+      price: 1200,
+      discount: 20,
+      rating: 4.5,
+      reviews: 35,
+    image: "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/rzri7kytphxalrm9rubd.webp",
+    images: ["https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/rzri7kytphxalrm9rubd.webp"],
+    category: "laptop",
+    slug: "gaming-laptop",
+    stockAvailability:10,
+    sizes:["14 inch","16 inch"],
+    colors:["white","grey"],
+    tags: ["Gaming", "Laptop", "High Performance"],
+    date: 1738667977644,
+    __v: 0,
   },
   {
-    "id": 2,
-    "image": "https://source.unsplash.com/400x300/?smartphone,technology",
-    "name": "Smartphone Pro",
-    "price": 800,
-    "discount": 10,
-    "rating": 4.8,
-    "reviews": 50,
-    "category": "Electronics",
-    "tags": ["Smartphone", "5G", "Android"],
-    "slug": "smartphone-pro"
+    _id: "3",
+    name: "MacBook Pro 16",
+    description:
+      "The MacBook Pro 16, powered by Apple's M2 Pro chip, offers outstanding performance with 16GB RAM and a 512GB SSD. Whether you're editing high-resolution video, developing software, or multitasking with ease, this laptop can handle the toughest tasks. It features a stunning Retina display with True Tone technology, making it a top choice for professionals in creative industries or anyone who demands premium performance in a portable form.",
+      price: 1200,
+      discount: 20,
+      rating: 4.5,
+      reviews: 35,
+    image: "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/rzri7kytphxalrm9rubd.webp",
+    category: "laptop",
+    slug: "gaming-laptop",
+    tags: ["Gaming", "Laptop", "High Performance"],
+    date: 1738667977644,
+    __v: 0,
   },
   {
-    "id": 3,
-    "image": "https://source.unsplash.com/400x300/?headphones,music",
-    "name": "Wireless Headphones",
-    "price": 250,
-    "discount": 15,
-    "rating": 4.2,
-    "reviews": 20,
-    "category": "Accessories",
-    "tags": ["Headphones", "Wireless", "Noise Cancelling"],
-    "slug": "wireless-headphones"
+    _id: "4",
+    name: "MacBook Pro 16",
+    description:
+      "The MacBook Pro 16, powered by Apple's M2 Pro chip, offers outstanding performance with 16GB RAM and a 512GB SSD. Whether you're editing high-resolution video, developing software, or multitasking with ease, this laptop can handle the toughest tasks. It features a stunning Retina display with True Tone technology, making it a top choice for professionals in creative industries or anyone who demands premium performance in a portable form.",
+      price: 1200,
+      discount: 20,
+      rating: 4.5,
+      reviews: 35,
+    image: "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/rzri7kytphxalrm9rubd.webp",
+    category: "laptop",
+    slug: "gaming-laptop",
+    tags: ["Gaming", "Laptop", "High Performance"],
+    date: 1738667977644,
+    __v: 0,
   },
   {
-    "id": 4,
-    "image": "https://source.unsplash.com/400x300/?television,entertainment",
-    "name": "4K OLED TV",
-    "price": 1500,
-    "discount": 25,
-    "rating": 4.7,
-    "reviews": 45,
-    "category": "Home Appliances",
-    "tags": ["TV", "4K", "OLED"],
-    "slug": "4k-oled-tv"
+    _id: "5",
+    name: "MacBook Pro 16",
+    description:
+      "The MacBook Pro 16, powered by Apple's M2 Pro chip, offers outstanding performance with 16GB RAM and a 512GB SSD. Whether you're editing high-resolution video, developing software, or multitasking with ease, this laptop can handle the toughest tasks. It features a stunning Retina display with True Tone technology, making it a top choice for professionals in creative industries or anyone who demands premium performance in a portable form.",
+      price: 1200,
+      discount: 20,
+      rating: 4.5,
+      reviews: 35,
+    image: "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/rzri7kytphxalrm9rubd.webp",
+    category: "laptop",
+    slug: "gaming-laptop",
+    tags: ["Gaming", "Laptop", "High Performance"],
+    date: 1738667977644,
+    __v: 0,
   },
   {
-    "id": 5,
-    "image": "https://source.unsplash.com/400x300/?camera,photography",
-    "name": "Mirrorless Camera",
-    "price": 1100,
-    "discount": 18,
-    "rating": 4.6,
-    "reviews": 30,
-    "category": "Cameras",
-    "tags": ["Photography", "Mirrorless", "DSLR"],
-    "slug": "mirrorless-camera"
+    _id: "6",
+    name: "MacBook Pro 16",
+    description:
+      "The MacBook Pro 16, powered by Apple's M2 Pro chip, offers outstanding performance with 16GB RAM and a 512GB SSD. Whether you're editing high-resolution video, developing software, or multitasking with ease, this laptop can handle the toughest tasks. It features a stunning Retina display with True Tone technology, making it a top choice for professionals in creative industries or anyone who demands premium performance in a portable form.",
+      price: 1200,
+      discount: 20,
+      rating: 4.5,
+      reviews: 35,
+    image: "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/rzri7kytphxalrm9rubd.webp",
+    category: "laptop",
+    slug: "gaming-laptop",
+    tags: ["Gaming", "Laptop", "High Performance"],
+    date: 1738667977644,
+    __v: 0,
   },
   {
-    "id": 6,
-    "image": "https://source.unsplash.com/400x300/?camera,photography",
-    "name": "Mirrorless Camera",
-    "price": 1100,
-    "discount": 18,
-    "rating": 4.6,
-    "reviews": 30,
-    "category": "Cameras",
-    "tags": ["Photography", "Mirrorless", "DSLR"],
-    "slug": "mirrorless-camera"
+    _id: "7",
+    name: "MacBook Pro 16",
+    description:
+      "The MacBook Pro 16, powered by Apple's M2 Pro chip, offers outstanding performance with 16GB RAM and a 512GB SSD. Whether you're editing high-resolution video, developing software, or multitasking with ease, this laptop can handle the toughest tasks. It features a stunning Retina display with True Tone technology, making it a top choice for professionals in creative industries or anyone who demands premium performance in a portable form.",
+      price: 1200,
+      discount: 20,
+      rating: 4.5,
+      reviews: 35,
+    image: "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/rzri7kytphxalrm9rubd.webp",
+    category: "laptop",
+    slug: "gaming-laptop",
+    tags: ["Gaming", "Laptop", "High Performance"],
+    date: 1738667977644,
+    __v: 0,
   },
   {
-    "id": 7,
-    "image": "https://source.unsplash.com/400x300/?camera,photography",
-    "name": "Mirrorless Camera",
-    "price": 1100,
-    "discount": 18,
-    "rating": 4.6,
-    "reviews": 30,
-    "category": "Cameras",
-    "tags": ["Photography", "Mirrorless", "DSLR"],
-    "slug": "mirrorless-camera"
+    _id: "8",
+    name: "MacBook Pro 16",
+    description:
+      "The MacBook Pro 16, powered by Apple's M2 Pro chip, offers outstanding performance with 16GB RAM and a 512GB SSD. Whether you're editing high-resolution video, developing software, or multitasking with ease, this laptop can handle the toughest tasks. It features a stunning Retina display with True Tone technology, making it a top choice for professionals in creative industries or anyone who demands premium performance in a portable form.",
+      price: 1200,
+      discount: 20,
+      rating: 4.5,
+      reviews: 35,
+    image: "https://raw.githubusercontent.com/avinashdm/gs-images/main/quickcart/rzri7kytphxalrm9rubd.webp",
+    category: "laptop",
+    slug: "gaming-laptop",
+    tags: ["Gaming", "Laptop", "High Performance"],
+    date: 1738667977644,
+    __v: 0,
   },
-  {
-    "id": 8,
-    "image": "https://source.unsplash.com/400x300/?camera,photography",
-    "name": "Mirrorless Camera",
-    "price": 1100,
-    "discount": 18,
-    "rating": 4.6,
-    "reviews": 30,
-    "category": "Cameras",
-    "tags": ["Photography", "Mirrorless", "DSLR"],
-    "slug": "mirrorless-camera"
-  },
-  {
-    "id": 9,
-    "image": "https://source.unsplash.com/400x300/?camera,photography",
-    "name": "Mirrorless Camera",
-    "price": 1100,
-    "discount": 18,
-    "rating": 4.6,
-    "reviews": 30,
-    "category": "Cameras",
-    "tags": ["Photography", "Mirrorless", "DSLR"],
-    "slug": "mirrorless-camera"
-  },
-  {
-    "id": 10,
-    "image": "https://source.unsplash.com/400x300/?camera,photography",
-    "name": "Mirrorless Camera",
-    "price": 1100,
-    "discount": 18,
-    "rating": 4.6,
-    "reviews": 30,
-    "category": "Cameras",
-    "tags": ["Photography", "Mirrorless", "DSLR"],
-    "slug": "mirrorless-camera"
-  },
-  {
-    "id": 11,
-    "image": "https://source.unsplash.com/400x300/?camera,photography",
-    "name": "Mirrorless Camera",
-    "price": 1100,
-    "discount": 18,
-    "rating": 4.6,
-    "reviews": 30,
-    "category": "Cameras",
-    "tags": ["Photography", "Mirrorless", "DSLR"],
-    "slug": "mirrorless-camera"
-  }
+  
 ];
-
 
 export const wishList = [
   {
@@ -196,27 +180,26 @@ export const cartList = [
   },
 ];
 
-
-export const UserAddress= [
+export const UserAddress = [
   {
-    "receiver": "John Doe",
-    "address1": "1234, 56th Street",
-    "address2": "Near ABC Park",
-    "city": "New York",
-    "state": "New York",
-    "pin": "10001",
-    "id": 1
+    receiver: "John Doe",
+    address1: "1234, 56th Street",
+    address2: "Near ABC Park",
+    city: "New York",
+    state: "New York",
+    pin: "10001",
+    id: 1,
   },
   {
-    "receiver": "Jane Doe",
-    "address1": "5678, 90th Street",
-    "address2": "Near XYZ Park",
-    "city": "Los Angeles",
-    "state": "California",
-    "pin": "90001",
-    "id": 2
-  }
-]
+    receiver: "Jane Doe",
+    address1: "5678, 90th Street",
+    address2: "Near XYZ Park",
+    city: "Los Angeles",
+    state: "California",
+    pin: "90001",
+    id: 2,
+  },
+];
 
 export const orderHistory = [
   {
@@ -270,14 +253,18 @@ export const orderHistory = [
   },
 ];
 
-
 export const returnsHistory = [
   {
     id: "RET123456",
     returnDate: "2024-03-25",
     items: [
       { name: "Wireless Mouse", quantity: 1, price: 1299, image: "/mouse.png" },
-      { name: "Mechanical Keyboard", quantity: 1, price: 3499, image: "/keyboard.png" },
+      {
+        name: "Mechanical Keyboard",
+        quantity: 1,
+        price: 3499,
+        image: "/keyboard.png",
+      },
     ],
     totalAmount: 4798,
     status: "Refunded",
@@ -287,7 +274,12 @@ export const returnsHistory = [
     id: "RET123457",
     returnDate: "2024-03-22",
     items: [
-      { name: "Gaming Headset", quantity: 1, price: 2499, image: "/headset.png" },
+      {
+        name: "Gaming Headset",
+        quantity: 1,
+        price: 2499,
+        image: "/headset.png",
+      },
       { name: "USB-C Hub", quantity: 2, price: 999, image: "/hub.png" },
     ],
     totalAmount: 4497,
@@ -297,7 +289,9 @@ export const returnsHistory = [
   {
     id: "RET123458",
     returnDate: "2024-03-18",
-    items: [{ name: "Laptop Stand", quantity: 1, price: 1899, image: "/stand.png" }],
+    items: [
+      { name: "Laptop Stand", quantity: 1, price: 1899, image: "/stand.png" },
+    ],
     totalAmount: 1899,
     status: "Rejected",
     paymentMethod: "Net Banking",
@@ -306,8 +300,18 @@ export const returnsHistory = [
     id: "RET123459",
     returnDate: "2024-03-15",
     items: [
-      { name: "Bluetooth Speaker", quantity: 1, price: 2999, image: "/speaker.png" },
-      { name: "USB-C Charger", quantity: 1, price: 1499, image: "/charger.png" },
+      {
+        name: "Bluetooth Speaker",
+        quantity: 1,
+        price: 2999,
+        image: "/speaker.png",
+      },
+      {
+        name: "USB-C Charger",
+        quantity: 1,
+        price: 1499,
+        image: "/charger.png",
+      },
     ],
     totalAmount: 4498,
     status: "Refunded",
@@ -316,7 +320,14 @@ export const returnsHistory = [
   {
     id: "RET123460",
     returnDate: "2024-03-10",
-    items: [{ name: "Smartwatch", quantity: 1, price: 5999, image: "/smartwatch.png" }],
+    items: [
+      {
+        name: "Smartwatch",
+        quantity: 1,
+        price: 5999,
+        image: "/smartwatch.png",
+      },
+    ],
     totalAmount: 5999,
     status: "Pending",
     paymentMethod: "Cash on Delivery",
@@ -329,38 +340,40 @@ export const personalDetails = [
     lastName: "Sharma",
     email: "rahul.sharma@example.com",
     phone: "+91 9876543210",
-  }
+  },
 ];
 
-export const productDetails = [{
-  "id": 1,
-  "name": "Gaming Laptop",
-  "price": 1200,
-  "discount": 20,
-  "rating": 4.5,
-  "reviews": 35,
-  "category": "Electronics",
-  "tags": ["Gaming", "Laptop", "High Performance"],
-  "slug": "gaming-laptop",
-  "description": "A high-performance gaming laptop featuring an Intel i7 13th Gen processor, 16GB RAM, and an RTX 4060 GPU. Ideal for gamers and professionals.",
-  "specifications": {
-    "Processor": "Intel i7 13th Gen",
-    "RAM": "16GB DDR5",
-    "Storage": "1TB SSD",
-    "GPU": "NVIDIA RTX 4060",
-    "Display": "15.6-inch 144Hz",
-    "Battery Life": "8 hours"
+export const productDetails = [
+  {
+    id: 1,
+    name: "Gaming Laptop",
+    price: 1200,
+    discount: 20,
+    rating: 4.5,
+    reviews: 35,
+    category: "Electronics",
+    tags: ["Gaming", "Laptop", "High Performance"],
+    slug: "gaming-laptop",
+    description:
+      "A high-performance gaming laptop featuring an Intel i7 13th Gen processor, 16GB RAM, and an RTX 4060 GPU. Ideal for gamers and professionals.",
+    specifications: {
+      Processor: "Intel i7 13th Gen",
+      RAM: "16GB DDR5",
+      Storage: "1TB SSD",
+      GPU: "NVIDIA RTX 4060",
+      Display: "15.6-inch 144Hz",
+      "Battery Life": "8 hours",
+    },
+    images: [
+      "/dummyimage.png",
+      "/hp-pav.jpg",
+      "/tuf-gaming.jpg",
+      "/dummyimage.png",
+      "/hp-pav.jpg",
+      "/tuf-gaming.jpg",
+    ],
+    stockAvailability: 10,
+    colors: ["Black", "Silver"],
+    sizes: ["15.6-inch", "17-inch"],
   },
-  "images": [
-"/dummyimage.png",
-"/hp-pav.jpg",
-"/tuf-gaming.jpg", 
-"/dummyimage.png",
-"/hp-pav.jpg",
-"/tuf-gaming.jpg", 
-],
-  "stockAvailability": 10,
-  "colors": ["Black", "Silver"],
-  "sizes": ["15.6-inch", "17-inch"]
-}];
-
+];

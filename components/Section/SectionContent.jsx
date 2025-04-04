@@ -5,19 +5,10 @@ function SectionContent({ listOfProducts }) {
 
   return (
     <div
-      className="realtive grid grid-cols-2 md:flex gap-3 overflow-x-auto no-scrollbar scroll-smooth"
+      className="realtive grid grid-cols-2 md:grid-cols-5 gap-8 items-center justify-center w-full"
     >
       {listOfProducts.map((product) => (
-        <ProductCard
-          key={product.id}
-          productimagesrc={product.image}
-          productname={product.name}
-          productprice={product.price}
-          productdiscount={product.discount}
-          productrating={product.rating}
-          productreviewscount={product.reviews}
-          productslug={`${product.category}/${product.slug}`}
-        />
+        <ProductCard key={product._id || product.slug} product={product} />
       ))}
     </div>
   );

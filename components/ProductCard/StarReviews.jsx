@@ -8,21 +8,21 @@ function StarReviews({ rating = 5, reviewsCount = 0 }) {
     const emptyStars = totalStars - fullStars - (hasHalfStar ? 1 : 0); // Remaining empty stars
 
     return (
-        <div className="flex items-center gap-1 text-yellow-500">
+        <div className="flex items-center gap-1 text-orange-500">
             {/* Full Stars */}
             {[...Array(fullStars)].map((_, index) => (
-                <Star key={index} fill="currentColor" stroke="none" className="w-5 h-5" />
+                <Star key={index} fill="currentColor" stroke="none" className="w-4 h-4" />
             ))}
 
             {/* Half Star (if applicable) */}
-            {hasHalfStar && <StarHalf fill="currentColor" stroke="none" className="w-5 h-5" />}
+            {hasHalfStar && <StarHalf fill="currentColor" stroke="none" className="w-4 h-4" />}
 
             {/* Empty Stars */}
             {[...Array(emptyStars)].map((_, index) => (
                 <StarOutline key={index} className="w-5 h-5 text-gray-400" />
             ))}
-            <span className="text-black">
-                ({reviewsCount} reviews)
+            <span className="text-black text-xs">
+                ({reviewsCount})
             </span>
         </div>
     );
