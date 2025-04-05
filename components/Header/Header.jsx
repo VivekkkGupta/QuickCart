@@ -5,10 +5,11 @@ import SearchBar from "./SearchBar";
 import LogoSection from "./LogoSection";
 import UserAccountButton from "./UserAccountButton";
 import HeaderLoader from "./HeaderLoader";
+import CartIconButton from "./CartIconButton";
 
 function Header() {
     return (
-        <header className="top-0 z-50 w-full border-b bg-white relative">
+        <header className="top-0 z-50 w-full border-b bg-white sticky top-0">
             <div className="relative w-full h-15 flex items-center justify-between overflow-hidden py-2 px-4 border-b max-w-[1240px] mx-auto">
                 <LogoSection />
                 <NavLinks /> {/* No need to pass pathname */}
@@ -17,9 +18,7 @@ function Header() {
                     <Link href={"/wishlist"}>
                         <HeartIcon />
                     </Link>
-                    <Link href={"/cart"}>
-                        <ShoppingCart />
-                    </Link>
+                    <CartIconButton/>
                     <UserAccountButton />
                 </div>
             </div>

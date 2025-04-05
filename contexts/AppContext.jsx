@@ -1,16 +1,22 @@
 "use client";
 
+import { products } from "@/data/data";
+import { useRouter } from "next/navigation";
 import { createContext, useContext, Provider, useEffect } from "react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { products } from "@/data/data";
+
 
 const AppContext = createContext();
 
 export const useAppContext = () => useContext(AppContext);
 
 export const AppContextProvider = ({ children }) => {
+
+    const [currency,setCurrency] = useState("₹")
   const [cartProducts, setCartProducts] = useState({});
+  
+    const router = useRouter()
 
   const menuItems = [
     { name: "Home", path: "/" },
@@ -33,19 +39,18 @@ export const AppContextProvider = ({ children }) => {
   };
 
   const handleAddToCart = (product) => {
-    // console.log("add to cart : ", product);
     const productId = product._id;
     const cartItems = structuredClone(cartProducts);
 
     if (cartItems[productId]) {
       cartItems[productId] += 1;
+      toast.success("Increased Item quantity by 1");
     } else {
       cartItems[productId] = 1;
+      toast.success("Product Added to Cart");
     }
     // console.log(cartItems)
     setCartProducts(cartItems);
-    toast.success("Product Added to Cart");
-
     //API CALL HERE to ADD TO CART
   };
 
@@ -59,15 +64,34 @@ export const AppContextProvider = ({ children }) => {
     return count;
   };
 
-  const updateCartQuantity = async (itemId, quantity) => {
+  const updateCartQuantity = (itemId, quantity) => {
     let cartData = structuredClone(cartProducts);
     if (quantity === 0) {
       delete cartData[itemId];
+      toast.success("Removed Item from Cart")
     } else {
       cartData[itemId] = quantity;
+      toast.success(`Decreased Item quantity`)
     }
-    setCartItems(cartData);
+    setCartProducts(cartData);
   };
+
+  const getCartAmount = () => {
+    let totalAmount = 0;
+    for (const item in cartProducts) {
+        let itemInfo = products.find((product) => product._id === item);
+        if (cartProducts[item] > 0) {
+            totalAmount += itemInfo.price * cartProducts[item];
+        }
+    }
+    return Math.floor(totalAmount * 100) / 100;
+}
+
+const handleBuyNow = (product) =>{
+handleAddToCart(product);
+router.push("/cart")
+}
+
 
   useEffect(() => {
     console.log(cartProducts);
@@ -82,6 +106,9 @@ export const AppContextProvider = ({ children }) => {
     routesObject,
     handleAddToCart,
     updateCartQuantity,
+    getCartAmount,
+    currency,router,
+    handleBuyNow,
   };
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 };

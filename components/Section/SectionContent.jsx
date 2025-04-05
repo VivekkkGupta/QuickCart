@@ -1,7 +1,7 @@
+'use client'
 import ProductCard from "@/components/ProductCard/ProductCard";
 import { useAppContext } from "@/contexts/AppContext";
 import Link from "next/link";
-
 
 function SectionContent() {
 const {products} = useAppContext()

@@ -19,7 +19,7 @@ import { useAppContext } from "@/contexts/AppContext";
 const AboutProduct = ({ currentproduct }) => {
   const InStock = currentproduct.stockAvailability > 0;
 
-  const {handleAddToCart} = useAppContext()
+  const {handleAddToCart,router,handleBuyNow} = useAppContext()
 
   const [countBuyProduct, setCountBuyProduct] = useState(0);
   const [selectedSize, setSelectedSize] = useState(
@@ -29,20 +29,20 @@ const AboutProduct = ({ currentproduct }) => {
     currentproduct.colors[0] || ""
   );
 
-  const handleCountBuyProduct = (e) => {
-    if (e.target.name === "increment") {
-      if (currentproduct.stockAvailability > countBuyProduct)
-        setCountBuyProduct((prev) => prev + 1);
-      else
-        toast.error("You can't get More!", {
-          description: `Stock of this product is ${currentproduct.stockAvailability}`,
-          action: {
-            label: "close",
-          },
-        });
-    } else if (e.target.name === "decrement" && countBuyProduct > 0)
-      setCountBuyProduct((prev) => prev - 1);
-  };
+  // const handleCountBuyProduct = (e) => {
+  //   if (e.target.name === "increment") {
+  //     if (currentproduct.stockAvailability > countBuyProduct)
+  //       setCountBuyProduct((prev) => prev + 1);
+  //     else
+  //       toast.error("You can't get More!", {
+  //         description: `Stock of this product is ${currentproduct.stockAvailability}`,
+  //         action: {
+  //           label: "close",
+  //         },
+  //       });
+  //   } else if (e.target.name === "decrement" && countBuyProduct > 0)
+  //     setCountBuyProduct((prev) => prev - 1);
+  // };
 
   const handleCart = async (product) => {
     await handleAddToCart(product);
@@ -116,7 +116,7 @@ const AboutProduct = ({ currentproduct }) => {
         )}
 
         {/* Buy Section */}
-        <div className="flex flex-wrap items-center gap-4">
+        {/* <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center space-x-2">
             <Button onClick={handleCountBuyProduct} name="decrement">
               <Minus />
@@ -126,7 +126,7 @@ const AboutProduct = ({ currentproduct }) => {
               <Plus />
             </Button>
           </div>
-        </div>
+        </div> */}
 
         {/* Add to cart and buy now button */}
         <div className="w-full flex gap-2 items-center justify-between">
@@ -138,7 +138,9 @@ const AboutProduct = ({ currentproduct }) => {
             <ShoppingCartIcon />
           </button>
 
-          <button className="flex items-center justify-center gap-2 bg-orange-500 border-2 border-transparent rounded-sm w-full py-4 text-white cursor-pointer hover:bg-orange-600 transition-all duration-300">
+          <button 
+          onClick={()=>handleBuyNow(currentproduct)}
+          className="flex items-center justify-center gap-2 bg-orange-500 border-2 border-transparent rounded-sm w-full py-4 text-white cursor-pointer hover:bg-orange-600 transition-all duration-300">
             Buy Now
           </button>
         </div>

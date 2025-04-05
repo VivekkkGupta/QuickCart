@@ -1,6 +1,36 @@
-import React from 'react'
+'use client'
+
+import { addressDummyData } from "@/assets/assets";
+import { useAppContext } from '@/contexts/AppContext';
+import React, { useEffect, useState } from 'react'
+
 
 function OrderSummary() {
+
+  const {router } = useAppContext()
+  const { currency, getCartCount, getCartAmount } = useAppContext()
+  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [userAddresses, setUserAddresses] = useState([]);
+
+  const fetchUserAddresses = async () => {
+    setUserAddresses(addressDummyData);
+  }
+
+  const handleAddressSelect = (address) => {
+    setSelectedAddress(address);
+    setIsDropdownOpen(false);
+  };
+
+  const createOrder =()=>{
+    // Go to the Payment Gateway 
+    router.push('/payment-gateway')
+  } 
+
+  useEffect(() => {
+    fetchUserAddresses();
+  }, [])
+
   return (
     <div className="w-full md:w-96 bg-gray-500/5 p-5">
       <h2 className="text-xl md:text-2xl font-medium text-gray-700">

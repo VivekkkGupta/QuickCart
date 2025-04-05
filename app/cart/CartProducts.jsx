@@ -1,19 +1,20 @@
 "use client";
+
 import { useAppContext } from "@/contexts/AppContext";
 import { assets } from "@/assets/assets";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
-
-import  products from "@/data/data"
 
 function CartProducts() {
-  const router = useRouter();
-
-  const { cartProducts, setCartProducts, getCartCount, updateCartQuantity } =
-    useAppContext();
-
+  const {
+    products,
+    cartProducts,
+    setCartProducts,
+    getCartCount,
+    updateCartQuantity,
+    handleAddToCart,
+  } = useAppContext();
   return (
     <div className="flex-1">
       <div className="flex items-center justify-between mb-8 border-b border-gray-500/30 pb-6">
@@ -24,13 +25,11 @@ function CartProducts() {
           {getCartCount()} Items
         </p>
       </div>
-      {cartProducts.length === 0 && (
+      {cartProducts.length === 0 ? (
         <div className="text-red-700 text-xl flex items-center justify-center w-full py-10">
           No Products in Cart
         </div>
-      )}
-
-      {cartProducts.length > 0 && (
+      ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full table-auto">
             <thead className="text-left">
@@ -50,12 +49,20 @@ function CartProducts() {
               </tr>
             </thead>
             <tbody className="">
-              {Object.keys(cartItems).map((itemId) => {
+              {Object.keys(cartProducts).map((itemId) => {
                 const product = products.find(
                   (product) => product._id === itemId
                 );
+                console.log("Product : ", product);
 
-                if (!product || cartItems[itemId] <= 0) return null;
+                if (!product || cartProducts[itemId] <= 0)
+                  return (
+                    <>
+                      <div className="text-xl text-orange-500">
+                        No Products in Cart
+                      </div>
+                    </>
+                  );
 
                 return (
                   <tr key={itemId}>
@@ -63,7 +70,7 @@ function CartProducts() {
                       <div>
                         <div className="rounded-lg overflow-hidden bg-gray-500/10 p-2">
                           <Image
-                            src={product.image[0]}
+                            src={product.image}
                             alt={product.name}
                             className="w-16 h-auto object-cover mix-blend-multiply"
                             width={1280}
@@ -71,7 +78,7 @@ function CartProducts() {
                           />
                         </div>
                         <button
-                          className="md:hidden text-xs text-orange-600 mt-1"
+                          className="md:hidden mx-auto w-full text-xs text-orange-600 mt-2"
                           onClick={() => updateCartQuantity(product._id, 0)}
                         >
                           Remove
@@ -88,7 +95,7 @@ function CartProducts() {
                       </div>
                     </td>
                     <td className="py-4 md:px-4 px-1 text-gray-600">
-                      ${product.offerPrice}
+                      ₹{product.price}
                     </td>
                     <td className="py-4 md:px-4 px-1">
                       <div className="flex items-center md:gap-2 gap-1">
@@ -96,7 +103,7 @@ function CartProducts() {
                           onClick={() =>
                             updateCartQuantity(
                               product._id,
-                              cartItems[itemId] - 1
+                              cartProducts[itemId] - 1
                             )
                           }
                         >
@@ -114,10 +121,10 @@ function CartProducts() {
                             )
                           }
                           type="number"
-                          value={cartItems[itemId]}
-                          className="w-8 border text-center appearance-none"
+                          value={cartProducts[itemId]}
+                          className="w-[50px] border text-center appearance-none"
                         ></input>
-                        <button onClick={() => addToCart(product._id)}>
+                        <button onClick={() => handleAddToCart(product)}>
                           <Image
                             src={assets.increase_arrow}
                             alt="increase_arrow"
@@ -127,7 +134,7 @@ function CartProducts() {
                       </div>
                     </td>
                     <td className="py-4 md:px-4 px-1 text-gray-600">
-                      ${(product.offerPrice * cartItems[itemId]).toFixed(2)}
+                      ₹{(product.price * cartProducts[itemId]).toFixed(2)}
                     </td>
                   </tr>
                 );

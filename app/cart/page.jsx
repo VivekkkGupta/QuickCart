@@ -4,9 +4,9 @@ import CartProducts from './CartProducts';
 function Page() {
   return (
     <>
-    <div className="flex flex-col m:flex-row gap-10">
+    <div className="flex flex-col md:flex-row gap-10">
       <CartProducts />
-      {/* <OrderSummary products={products}/> */}
+      <OrderSummary />
     </div>
     </>
   )

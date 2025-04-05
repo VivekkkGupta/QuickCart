@@ -6,7 +6,7 @@ function LogoSection() {
   return (
     <div>
         <Link
-          href={"/home"}
+          href={"/"}
           className="flex gap-2 items-end justify-center tracking-tighter"
         >
           <Image

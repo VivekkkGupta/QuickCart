@@ -1,13 +1,11 @@
 "use client";
 
 import React from "react";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Heart } from "lucide-react";
 import Price from "./Price";
 import StarReviews from "./StarReviews";
 import Link from "next/link";
-import { toast } from "sonner";
 import { useAppContext } from "@/contexts/AppContext";
 
 // function ProductCard({ productimagesrc = "/dummyimage.png", productname = "dummy", productdescription="a sample product" productprice = 100, productdiscount = 10, productrating = 3.5, productreviewscount = 0, productslug = "", }) {

@@ -187,7 +187,6 @@ export const products = [
     sizes:["14 inch","16 inch"],
     colors:["white","grey"],
     tags: ["Gaming", "Laptop", "High Performance"],
-    date: 1738667977644,
     __v: 0,
   },
   {
