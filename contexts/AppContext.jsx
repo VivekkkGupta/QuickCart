@@ -3,13 +3,14 @@
 import { createContext, useContext, Provider, useEffect } from "react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { products } from "@/data/data";
 
 const AppContext = createContext();
 
 export const useAppContext = () => useContext(AppContext);
 
 export const AppContextProvider = ({ children }) => {
-  const [cartProducts, setCartProducts] = useState([]);
+  const [cartProducts, setCartProducts] = useState({});
 
   const menuItems = [
     { name: "Home", path: "/" },
@@ -32,30 +33,55 @@ export const AppContextProvider = ({ children }) => {
   };
 
   const handleAddToCart = (product) => {
-    console.log("add to cart : ", product);
-    setCartProducts((prev) => [...prev, product]);
+    // console.log("add to cart : ", product);
+    const productId = product._id;
+    const cartItems = structuredClone(cartProducts);
+
+    if (cartItems[productId]) {
+      cartItems[productId] += 1;
+    } else {
+      cartItems[productId] = 1;
+    }
+    // console.log(cartItems)
+    setCartProducts(cartItems);
+    toast.success("Product Added to Cart");
+
     //API CALL HERE to ADD TO CART
   };
 
-  const getCartCount = ()=>{
+  const getCartCount = () => {
     let count = 0;
-    for(const item of cartProducts){
-        count += 1;
+    for (const productId in cartProducts) {
+      if (cartProducts[productId] > 0) {
+        count += cartProducts[productId];
+      }
     }
     return count;
-  }
+  };
+
+  const updateCartQuantity = async (itemId, quantity) => {
+    let cartData = structuredClone(cartProducts);
+    if (quantity === 0) {
+      delete cartData[itemId];
+    } else {
+      cartData[itemId] = quantity;
+    }
+    setCartItems(cartData);
+  };
 
   useEffect(() => {
     console.log(cartProducts);
   }, [cartProducts]);
 
   const values = {
+    products,
     cartProducts,
     setCartProducts,
     getCartCount,
     menuItems,
     routesObject,
     handleAddToCart,
+    updateCartQuantity,
   };
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 };

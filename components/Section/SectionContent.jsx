@@ -1,11 +1,14 @@
 import ProductCard from "@/components/ProductCard/ProductCard";
+import { useAppContext } from "@/contexts/AppContext";
 import Link from "next/link";
 
-function SectionContent({ listOfProducts }) {
+
+function SectionContent() {
+const {products} = useAppContext()
   return (
     <div className="flex flex-col items-center justify-between gap-4">
       <div className="realtive grid grid-cols-2 md:grid-cols-5 gap-8 items-center justify-center w-full">
-        {listOfProducts.map((product) => (
+        {products.map((product) => (
           <ProductCard key={product._id || product.slug} product={product} />
         ))}
       </div>
