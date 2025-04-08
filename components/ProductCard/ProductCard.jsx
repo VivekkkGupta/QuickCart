@@ -12,7 +12,7 @@ import { useAppContext } from "@/contexts/AppContext";
 function ProductCard({ product }) {
   if (!product) return null; // Handle missing product
 
-  const slugUrl = `/${product.category}/${product.slug}`;
+  const slugUrl = `/${product.product_category.slug}/${product.slug}`;
 
   const { handleAddToCart } = useAppContext();
 
@@ -35,21 +35,21 @@ function ProductCard({ product }) {
       <Link href={slugUrl}>
         <button className="flex items-center justify-center">
           <Image
-            src={product.image}
+            src={product.ProductImage[0].url}
             width={500}
             height={500}
             className="cursor-pointer w-full h-auto object-cover p-4 hover:scale-[1.2] transition-all duration-700 ease-in-out"
-            alt={product.name}
+            alt={product.ProductName}
           />
         </button>
         <div className="cursor-pointer">
-          <h2 className="text-sm truncate">{product.name}</h2>
+          <h2 className="text-sm truncate">{product.ProductName}</h2>
           <p className="mb-2 text-xs truncate text-gray-500">
-            {product.description}
+            {product.ProductDescription}
           </p>
           <StarReviews />
           <div className="mt-2 flex md:flex-row flex-col items-start md:items-center md:justify-between">
-            <Price price={product.price} discount={product.discount} />
+            <Price price={product.ProductPrice} discount={product.discount} />
             <button
               className={`mt-2 md:mt-0 w-full md:w-auto text-xs border-2 rounded-2xl px-3 py-1.5 cursor-pointer hover:shadow-lg transition-all duration-700`}
             >

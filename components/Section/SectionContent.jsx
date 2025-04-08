@@ -1,15 +1,22 @@
-'use client'
 import ProductCard from "@/components/ProductCard/ProductCard";
-import { useAppContext } from "@/contexts/AppContext";
+import axios from "axios";
+import { ChevronsLeftRightEllipsis } from "lucide-react";
 import Link from "next/link";
 
-function SectionContent() {
-const {products} = useAppContext()
+
+const SectionContent = async () => {
+
+  const {data} = await axios.get("https://ecommerce-cms-41dp.onrender.com/api/products?populate=*")
+
+  const products = data.data;
+
+  console.log(products)
+
   return (
     <div className="flex flex-col items-center justify-between gap-4">
       <div className="realtive grid grid-cols-2 md:grid-cols-5 gap-8 items-center justify-center w-full">
         {products.map((product) => (
-          <ProductCard key={product._id || product.slug} product={product} />
+          <ProductCard key={product.documentId} product={product} />
         ))}
       </div>
       <Link href={`/all-products`}>
@@ -19,6 +26,7 @@ const {products} = useAppContext()
       </Link>
     </div>
   );
-}
+};
 
 export default SectionContent;
+
