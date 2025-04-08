@@ -13,10 +13,10 @@ export const useAppContext = () => useContext(AppContext);
 
 export const AppContextProvider = ({ children }) => {
 
-    const [currency,setCurrency] = useState("₹")
+  const [currency, setCurrency] = useState("₹")
   const [cartProducts, setCartProducts] = useState({});
-  
-    const router = useRouter()
+
+  const router = useRouter()
 
   const menuItems = [
     { name: "Home", path: "/" },
@@ -79,23 +79,23 @@ export const AppContextProvider = ({ children }) => {
   const getCartAmount = () => {
     let totalAmount = 0;
     for (const item in cartProducts) {
-        let itemInfo = products.find((product) => product._id === item);
-        if (cartProducts[item] > 0) {
-            totalAmount += itemInfo.price * cartProducts[item];
-        }
+      let itemInfo = products.find((product) => product._id === item);
+      if (cartProducts[item] > 0) {
+        totalAmount += itemInfo.price * cartProducts[item];
+      }
     }
     return Math.floor(totalAmount * 100) / 100;
-}
+  }
 
-const handleBuyNow = (product) =>{
-handleAddToCart(product);
-router.push("/cart")
-}
+  const handleBuyNow = (product) => {
+    handleAddToCart(product);
+    router.push("/cart")
+  }
 
 
-  useEffect(() => {
-    console.log(cartProducts);
-  }, [cartProducts]);
+  // useEffect(() => {
+  //   console.log(cartProducts);
+  // }, [cartProducts]);
 
   const values = {
     products,
@@ -107,7 +107,7 @@ router.push("/cart")
     handleAddToCart,
     updateCartQuantity,
     getCartAmount,
-    currency,router,
+    currency, router,
     handleBuyNow,
   };
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;

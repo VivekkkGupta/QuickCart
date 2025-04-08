@@ -7,12 +7,15 @@ import Price from "./Price";
 import StarReviews from "./StarReviews";
 import Link from "next/link";
 import { useAppContext } from "@/contexts/AppContext";
+import { BASE_URL } from "@/lib/constants/constants";
 
 // function ProductCard({ productimagesrc = "/dummyimage.png", productname = "dummy", productdescription="a sample product" productprice = 100, productdiscount = 10, productrating = 3.5, productreviewscount = 0, productslug = "", }) {
 function ProductCard({ product }) {
-  if (!product) return null; // Handle missing product
 
-  const slugUrl = `/${product.product_category.slug}/${product.slug}`;
+  if (!product) return <div className="text-center text-red-500">Unable to fetch Products</div>; // Handle missing product
+  const { ProductName, ProductDescription, ProductPrice, discount, ProductImage, product_category, slug } = product
+
+  const slugUrl = `/${product_category.slug}/${slug}`;
 
   const { handleAddToCart } = useAppContext();
 
@@ -34,22 +37,26 @@ function ProductCard({ product }) {
       </div>
       <Link href={slugUrl}>
         <button className="flex items-center justify-center">
+
+          {
+            console.log(`${BASE_URL}${ProductImage[0].url}`)
+          }
           <Image
-            src={product.ProductImage[0].url}
+            src={`${BASE_URL}${ProductImage[0].url}`}
             width={500}
             height={500}
             className="cursor-pointer w-full h-auto object-cover p-4 hover:scale-[1.2] transition-all duration-700 ease-in-out"
-            alt={product.ProductName}
+            alt={ProductName}
           />
         </button>
         <div className="cursor-pointer">
-          <h2 className="text-sm truncate">{product.ProductName}</h2>
+          <h2 className="text-sm truncate">{ProductName}</h2>
           <p className="mb-2 text-xs truncate text-gray-500">
-            {product.ProductDescription}
+            {ProductDescription}
           </p>
           <StarReviews />
           <div className="mt-2 flex md:flex-row flex-col items-start md:items-center md:justify-between">
-            <Price price={product.ProductPrice} discount={product.discount} />
+            <Price price={ProductPrice} discount={discount || 10} />
             <button
               className={`mt-2 md:mt-0 w-full md:w-auto text-xs border-2 rounded-2xl px-3 py-1.5 cursor-pointer hover:shadow-lg transition-all duration-700`}
             >

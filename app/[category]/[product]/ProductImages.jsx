@@ -4,9 +4,13 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { ChevronDown, ChevronRight, ChevronLeft, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BASE_URL } from "@/lib/constants/constants";
 
 const ProductImages = ({ productimages }) => {
-  const [selectedImage, setSelectedImage] = useState(productimages[0]);
+
+  console.log(productimages)
+
+  const [selectedImage, setSelectedImage] = useState(productimages[0].url);
   const [startIndex, setStartIndex] = useState(0);
 
   const handleNext = () => {
@@ -35,10 +39,10 @@ const ProductImages = ({ productimages }) => {
               className={`cursor-pointer border-2 rounded-lg overflow-hidden flex items-center justify-center 
                 ${selectedImage === image ? "border-red-500" : "border-transparent"}
               `}
-              onClick={() => setSelectedImage(image)}
+              onClick={() => setSelectedImage(image.url)}
             >
               <Image
-                src={image}
+                src={`${BASE_URL}${image.url}`}
                 width={50}
                 height={50}
                 alt={`product-thumbnail-${index}`}
@@ -47,10 +51,10 @@ const ProductImages = ({ productimages }) => {
             </div>
           ))}
         </div>
-        
+
         {hasMoreImages && (
           <>
-          {/* mobile buttons  */}
+            {/* mobile buttons  */}
             <Button
               variant="ghost"
               size="icon"
@@ -85,7 +89,7 @@ const ProductImages = ({ productimages }) => {
             >
               <ChevronDown className="h-4 w-4" />
             </Button>
-            
+
           </>
         )}
       </div>
