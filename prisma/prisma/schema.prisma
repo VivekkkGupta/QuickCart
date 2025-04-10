@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int         @id @default(autoincrement())
+  clerkId   String      @unique
+  email     String      @unique
+  name      String?
+  avatar    String?
+  platform  String?
+  orders    Order[] 
+  address   Address[]
+  cart      Cart?
+  reviews   Review[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  isAdmin   Boolean     @default(false)
+}
+
+model Product{
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  price       Float
+  discount    Float?
+  stock       Int
+  category    String?
+  images      String[]
+  tags        String[]
+  reviews     Review[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Order {
+  id          Int         @id @default(autoincrement())
+  userId      Int
+  productId   Int
+  quantity    Int
+  totalPrice  Float
+  status      String      @default("pending")
+  user        User        @relation(fields: [userId], references: [id])
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Address{
+  id        Int      @id @default(autoincrement())
+  street   String
+  city     String
+  state    String
+  country  String
+  zipCode  String
+  userId   Int
+  user     User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Review{
+  id          Int         @id @default(autoincrement())
+  rating      Int
+  comment     Int
+  userId      Int
+  productId   Int
+  product     Product     @relation(fields: [productId], references: [id])
+  user        User        @relation(fields: [userId], references: [id])
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model Cart{
+  id            Int         @id @default(autoincrement())
+  userId        Int         @unique
+  user          User        @relation(fields: [userId], references: [id])
+}

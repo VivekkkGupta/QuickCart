@@ -1,0 +1,17 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=quickcartDB
+      - POSTGRES_USER=vivekgupta
+      - POSTGRES_PASSWORD=vivekgupta
+    
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
