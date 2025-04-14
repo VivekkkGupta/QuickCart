@@ -1,6 +1,6 @@
 import { productsForHomePage } from "@/data/data";
-import ProductImages from "./ProductImages";
-import AboutProduct from "./AboutProduct";
+import ProductImages from "../app/(frontend)/[category]/[slug]/ProductImages";
+import AboutProduct from "../app/(frontend)/[category]/[slug]/AboutProduct";
 import FeaturedProductsWithData from "@/components/FeaturedProduct/FeaturedProductsWithData";
 import { getProductBySlug } from "@/lib/helpers/apiFunctions";
 

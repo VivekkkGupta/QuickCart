@@ -10,7 +10,7 @@ const ProductImages = ({ productimages }) => {
 
   console.log(productimages)
 
-  const [selectedImage, setSelectedImage] = useState(productimages[0].url);
+  const [selectedImage, setSelectedImage] = useState(productimages[0]);
   const [startIndex, setStartIndex] = useState(0);
 
   const handleNext = () => {
@@ -42,7 +42,7 @@ const ProductImages = ({ productimages }) => {
               onClick={() => setSelectedImage(image.url)}
             >
               <Image
-                src={`${BASE_URL}${image.url}`}
+                src={`${image}`}
                 width={50}
                 height={50}
                 alt={`product-thumbnail-${index}`}

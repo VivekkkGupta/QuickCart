@@ -18,17 +18,17 @@ import { useAppContext } from "@/contexts/AppContext";
 
 const AboutProduct = ({ currentproduct }) => {
 
-  const { ProductName, ProductDescription, ProductPrice, discount, ProductImage, product_category, slug, product_reviews } = currentproduct
+  const { name, description, price, discount, category, slug,stock,tags } = currentproduct
 
-  const InStock = currentproduct.ProductStock > 0;
-  const AverageRating = product_reviews.map((review, index) => {
-    console.log(review)
-  })
-  const ReviewCount = product_reviews.length;
+  const InStock = stock > 0;
+  // const AverageRating = product_reviews.map((review, index) => {
+  //   console.log(review)
+  // })
+  // const ReviewCount = product_reviews.length;
 
   const { handleAddToCart, router, handleBuyNow } = useAppContext()
 
-  const [countBuyProduct, setCountBuyProduct] = useState(0);
+  // const [countBuyProduct, setCountBuyProduct] = useState(0);
   // const [selectedSize, setSelectedSize] = useState(
   //   currentproduct.sizes[0] || ""
   // );
@@ -47,13 +47,13 @@ const AboutProduct = ({ currentproduct }) => {
     <>
       <div className="flex flex-col w-full md:w-1/2 space-y-4">
         <h1 className="text-2xl font-bold text-gray-700">
-          {ProductName}
+          {name}
         </h1>
         <div className="flex gap-3 flex-wrap items-center">
-          <StarReviews
+          {/* <StarReviews
             rating={AverageRating}
             reviewsCount={ReviewCount}
-          />
+          /> */}
           |
           {InStock ? (
             <span className="text-sm text-green-500">In Stock</span>
@@ -61,11 +61,11 @@ const AboutProduct = ({ currentproduct }) => {
             <span className="text-sm text-red-500">Out of Stock</span>
           )}
         </div>
-        <p className="text-gray-600 text-sm">{ProductDescription}</p>
+        <p className="text-gray-600 text-sm">{description}</p>
 
         <Price
-          price={ProductPrice}
-          discount={10}
+          price={price}
+          discount={discount || 10}
           StrikeClass="text-sm"
           PriceClass="text-2xl font-bold text-gray-700"
         />
