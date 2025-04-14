@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Heart } from "lucide-react";
 import Price from "./Price";
@@ -9,22 +9,19 @@ import Link from "next/link";
 import { useAppContext } from "@/contexts/AppContext";
 import { BASE_URL } from "@/lib/constants/constants";
 
-// function ProductCard({ productimagesrc = "/dummyimage.png", productname = "dummy", productdescription="a sample product" productprice = 100, productdiscount = 10, productrating = 3.5, productreviewscount = 0, productslug = "", }) {
 function ProductCard({ product }) {
-
-  if (!product) return <div className="text-center text-red-500">Unable to fetch Products</div>; // Handle missing product
-  const { ProductName, ProductDescription, ProductPrice, discount, ProductImage, product_category, slug } = product
-
-  const slugUrl = `/${product_category.slug}/${slug}`;
-
   const { handleAddToCart } = useAppContext();
 
   const handleCart = async (e, product) => {
     await handleAddToCart(product);
   };
 
+  if (!product) return <div className="text-center text-red-500">Unable to fetch Products</div>;
+
+  const { name, description, price, discount, images, slug } = product;
+
   return (
-    <div className="relative z-0 flex flex-col w-full md:max-w-[250px] p-2 ">
+    <div className="relative z-0 flex flex-col w-full md:max-w-[250px] p-2">
       <div
         onClick={(e) => {
           e.stopPropagation();
@@ -35,30 +32,26 @@ function ProductCard({ product }) {
       >
         <Heart />
       </div>
-      <Link href={slugUrl}>
+      <Link href={slug}>
         <button className="flex items-center justify-center">
-
-          {
-            console.log(`${BASE_URL}${ProductImage[0].url}`)
-          }
           <Image
-            src={`${BASE_URL}${ProductImage[0].url}`}
+            src={images[0]}
             width={500}
             height={500}
             className="cursor-pointer w-full h-auto object-cover p-4 hover:scale-[1.2] transition-all duration-700 ease-in-out"
-            alt={ProductName}
+            alt={name}
           />
         </button>
         <div className="cursor-pointer">
-          <h2 className="text-sm truncate">{ProductName}</h2>
-          <p className="mb-2 text-xs truncate text-gray-500">
-            {ProductDescription}
-          </p>
+          <h2 className="text-sm truncate">{name}</h2>
+          <p className="mb-2 text-xs truncate text-gray-500">{description}</p>
           <StarReviews />
-          <div className="mt-2 flex md:flex-row flex-col items-start md:items-center md:justify-between">
-            <Price price={ProductPrice} discount={discount || 10} />
+          <div className="mt-2">
+            <Price price={price} discount={discount || 10} />
+          </div>
+          <div className="mt-4 w-full">
             <button
-              className={`mt-2 md:mt-0 w-full md:w-auto text-xs border-2 rounded-2xl px-3 py-1.5 cursor-pointer hover:shadow-lg transition-all duration-700`}
+              className="w-full text-xs border-2 rounded-lg px-4 py-2 cursor-pointer hover:shadow-lg transition-all duration-700  text-gray-800"
             >
               Buy now
             </button>
