@@ -15,9 +15,9 @@ function Header() {
                 <NavLinks /> {/* No need to pass pathname */}
                 <div className="h-full flex items-center gap-4">
                     <SearchBar />
-                    <Link href={"/wishlist"}>
+                    {/* <Link href={"/wishlist"}>
                         <HeartIcon />
-                    </Link>
+                    </Link> */}
                     <CartIconButton/>
                     <UserAccountButton />
                 </div>

@@ -1,6 +1,7 @@
 "use client";
 
-import { products } from "@/data/data";
+import { useUser } from "@clerk/nextjs";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, Provider, useEffect } from "react";
 import { useState } from "react";
@@ -14,7 +15,7 @@ export const useAppContext = () => useContext(AppContext);
 export const AppContextProvider = ({ children }) => {
 
   const [currency, setCurrency] = useState("₹")
-  const [cartProducts, setCartProducts] = useState({});
+  const [cartProducts, setCartProducts] = useState([]);
 
   const router = useRouter()
 
@@ -38,7 +39,15 @@ export const AppContextProvider = ({ children }) => {
     home: { name: "Home", path: "/" },
   };
 
-  const handleAddToCart = (product) => {
+  const user = useUser();
+
+  const handleAddToCart = async (product) => {
+
+    if(!user.isSignedIn){
+      toast.error("Please Login First!")
+      return 
+    }
+    
     const productId = product._id;
     const cartItems = structuredClone(cartProducts);
 
@@ -49,9 +58,12 @@ export const AppContextProvider = ({ children }) => {
       cartItems[productId] = 1;
       toast.success("Product Added to Cart");
     }
+
     // console.log(cartItems)
     setCartProducts(cartItems);
-    //API CALL HERE to ADD TO CART
+
+    // console.log(cartItems)
+    // API CALL HERE to ADD TO CART
   };
 
   const getCartCount = () => {
@@ -79,9 +91,8 @@ export const AppContextProvider = ({ children }) => {
   const getCartAmount = () => {
     let totalAmount = 0;
     for (const item in cartProducts) {
-      let itemInfo = products.find((product) => product._id === item);
-      if (cartProducts[item] > 0) {
-        totalAmount += itemInfo.price * cartProducts[item];
+      if (item.quantity > 0) {
+        totalAmount += item.product.price * cartProducts.quantity;
       }
     }
     return Math.floor(totalAmount * 100) / 100;
@@ -92,13 +103,23 @@ export const AppContextProvider = ({ children }) => {
     router.push("/cart")
   }
 
+  const fetchCartProducts = async ()=>{
+    try {
+      const {data} = await axios.get("/api/cart/get-products-cart");
+      setCartProducts(data.products)    
+      console.log(data.products)
+      console.log("Running ")  
+    } catch (error) {
+      toast.error("Something Went Wrong.")
+      console.log(error)
+    } 
+  }
 
   // useEffect(() => {
   //   console.log(cartProducts);
   // }, [cartProducts]);
 
   const values = {
-    products,
     cartProducts,
     setCartProducts,
     getCartCount,
@@ -109,6 +130,7 @@ export const AppContextProvider = ({ children }) => {
     getCartAmount,
     currency, router,
     handleBuyNow,
+    fetchCartProducts
   };
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 };

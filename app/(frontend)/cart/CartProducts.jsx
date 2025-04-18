@@ -8,9 +8,7 @@ import Link from "next/link";
 
 function CartProducts() {
   const {
-    products,
     cartProducts,
-    setCartProducts,
     getCartCount,
     updateCartQuantity,
     handleAddToCart,
@@ -49,29 +47,15 @@ function CartProducts() {
               </tr>
             </thead>
             <tbody className="">
-              {Object.keys(cartProducts).map((itemId) => {
-                const product = products.find(
-                  (product) => product._id === itemId
-                );
-                console.log("Product : ", product);
-
-                if (!product || cartProducts[itemId] <= 0)
-                  return (
-                    <>
-                      <div className="text-xl text-orange-500">
-                        No Products in Cart
-                      </div>
-                    </>
-                  );
-
+              {cartProducts.map((product) => {
                 return (
-                  <tr key={itemId}>
+                  <tr key={product.productId}>
                     <td className="flex items-center gap-4 py-4 md:px-4 px-1">
                       <div>
                         <div className="rounded-lg overflow-hidden bg-gray-500/10 p-2">
                           <Image
-                            src={product.image}
-                            alt={product.name}
+                            src={product.product.images[0]}
+                            alt={product.product.name}
                             className="w-16 h-auto object-cover mix-blend-multiply"
                             width={1280}
                             height={720}
@@ -79,30 +63,30 @@ function CartProducts() {
                         </div>
                         <button
                           className="md:hidden mx-auto w-full text-xs text-orange-600 mt-2"
-                          onClick={() => updateCartQuantity(product._id, 0)}
+                          onClick={() => updateCartQuantity(product.productId, 0)}
                         >
                           Remove
                         </button>
                       </div>
                       <div className="text-sm hidden md:block">
-                        <p className="text-gray-800">{product.name}</p>
+                        <p className="text-gray-800">{product.product.name}</p>
                         <button
                           className="text-xs text-orange-600 mt-1"
-                          onClick={() => updateCartQuantity(product._id, 0)}
+                          onClick={() => updateCartQuantity(product.productId, 0)}
                         >
                           Remove
                         </button>
                       </div>
                     </td>
                     <td className="py-4 md:px-4 px-1 text-gray-600">
-                      ₹{product.price}
+                      ₹{product.product.price}
                     </td>
                     <td className="py-4 md:px-4 px-1">
                       <div className="flex items-center md:gap-2 gap-1">
                         <button
                           onClick={() =>
                             updateCartQuantity(
-                              product._id,
+                              product.productId,
                               cartProducts[itemId] - 1
                             )
                           }
@@ -116,12 +100,12 @@ function CartProducts() {
                         <input
                           onChange={(e) =>
                             updateCartQuantity(
-                              product._id,
+                              product.productId,
                               Number(e.target.value)
                             )
                           }
                           type="number"
-                          value={cartProducts[itemId]}
+                          value={product.quantity}
                           className="w-[50px] border text-center appearance-none"
                         ></input>
                         <button onClick={() => handleAddToCart(product)}>
@@ -134,7 +118,7 @@ function CartProducts() {
                       </div>
                     </td>
                     <td className="py-4 md:px-4 px-1 text-gray-600">
-                      ₹{(product.price * cartProducts[itemId]).toFixed(2)}
+                      ₹{(product.product.price * product.quantity).toFixed(2)}
                     </td>
                   </tr>
                 );

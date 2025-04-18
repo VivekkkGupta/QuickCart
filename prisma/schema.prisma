@@ -57,6 +57,8 @@ model Order {
 
 model Address {
   id        Int      @id @default(autoincrement())
+  name      String
+  phone     String      
   street    String
   city      String
   state     String
@@ -87,4 +89,5 @@ model Cart {
   quantity  Int
   product   Product  @relation(fields: [productId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
+  @@unique([userId, productId]) 
 }

@@ -2,19 +2,22 @@
 
 import { addressDummyData } from "@/assets/assets";
 import { useAppContext } from '@/contexts/AppContext';
+import axios from "axios";
 import React, { useEffect, useState } from 'react'
 
 
 function OrderSummary() {
 
-  const {router } = useAppContext()
+  const { router } = useAppContext()
   const { currency, getCartCount, getCartAmount } = useAppContext()
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [userAddresses, setUserAddresses] = useState([]);
 
   const fetchUserAddresses = async () => {
-    setUserAddresses(addressDummyData);
+    const { data } = await axios.get("/api/address/get-address")
+    console.log(data.addresses)
+    setUserAddresses(data.addresses);
   }
 
   const handleAddressSelect = (address) => {
@@ -22,10 +25,10 @@ function OrderSummary() {
     setIsDropdownOpen(false);
   };
 
-  const createOrder =()=>{
+  const createOrder = () => {
     // Go to the Payment Gateway 
     router.push('/payment-gateway')
-  } 
+  }
 
   useEffect(() => {
     fetchUserAddresses();
@@ -49,7 +52,9 @@ function OrderSummary() {
             >
               <span>
                 {selectedAddress
-                  ? `${selectedAddress.fullName}, ${selectedAddress.area}, ${selectedAddress.city}, ${selectedAddress.state}`
+                  ? <>
+                    {`${selectedAddress.name} - ${selectedAddress.phone}  `} <br /> {` ${selectedAddress.street}, ${selectedAddress.city}, ${selectedAddress.state}, ${selectedAddress.country} - ${selectedAddress.zipCode}`}
+                  </>
                   : "Select Address"}
               </span>
               <svg className={`w-5 h-5 inline float-right transition-transform duration-200 ${isDropdownOpen ? "rotate-0" : "-rotate-90"}`}
@@ -67,11 +72,11 @@ function OrderSummary() {
                     className="px-4 py-2 hover:bg-gray-500/10 cursor-pointer"
                     onClick={() => handleAddressSelect(address)}
                   >
-                    {address.fullName}, {address.area}, {address.city}, {address.state}
+                    {`${address.name} - ${address.phone}  `} <br /> {` ${address.street}, ${address.city}, ${address.state}, ${address.country} - ${address.zipCode}`}
                   </li>
                 ))}
                 <li
-                  onClick={() => router.push("/add-address")}
+                  onClick={() => router.push("/address")}
                   className="px-4 py-2 hover:bg-gray-500/10 cursor-pointer text-center"
                 >
                   + Add New Address
