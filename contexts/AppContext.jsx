@@ -3,7 +3,7 @@
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { createContext, useContext, Provider, useEffect } from "react";
+import { createContext, useContext, Provider, useEffect, useCallback } from "react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -42,82 +42,102 @@ export const AppContextProvider = ({ children }) => {
   const user = useUser();
 
   const handleAddToCart = async (product) => {
-
-    if(!user.isSignedIn){
-      toast.error("Please Login First!")
-      return 
+    if (!user?.isSignedIn) {
+      toast.error("Please Login First!");
+      return;
     }
-    
-    const productId = product._id;
-    const cartItems = structuredClone(cartProducts);
+    console.log(product)
+    const productId = product.id;
+    const existing = cartProducts.find((item) => item.productId === productId);
 
-    if (cartItems[productId]) {
-      cartItems[productId] += 1;
-      toast.success("Increased Item quantity by 1");
+    let updatedCart;
+
+    if (existing) {
+      updatedCart = cartProducts.map((item) =>
+        item.productId === productId
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+      toast.success("Increased item quantity by 1");
     } else {
-      cartItems[productId] = 1;
-      toast.success("Product Added to Cart");
+      updatedCart = [...cartProducts, { productId, quantity: 1, product }];
+      toast.success("Product added to cart");
     }
 
-    // console.log(cartItems)
-    setCartProducts(cartItems);
+    setCartProducts(updatedCart);
 
-    // console.log(cartItems)
-    // API CALL HERE to ADD TO CART
+    try {
+      await axios.post("/api/cart/set-products-cart", {
+        productId,
+        quantity: existing ? existing.quantity + 1 : 1,
+      });
+    } catch (error) {
+      console.error("Failed to sync cart:", error);
+      toast.error("Failed to update cart on server");
+    }
   };
 
-  const getCartCount = () => {
-    let count = 0;
-    for (const productId in cartProducts) {
-      if (cartProducts[productId] > 0) {
-        count += cartProducts[productId];
-      }
-    }
-    return count;
-  };
 
-  const updateCartQuantity = (itemId, quantity) => {
-    let cartData = structuredClone(cartProducts);
-    if (quantity === 0) {
-      delete cartData[itemId];
-      toast.success("Removed Item from Cart")
-    } else {
-      cartData[itemId] = quantity;
-      toast.success(`Decreased Item quantity`)
-    }
-    setCartProducts(cartData);
-  };
 
-  const getCartAmount = () => {
-    let totalAmount = 0;
-    for (const item in cartProducts) {
-      if (item.quantity > 0) {
-        totalAmount += item.product.price * cartProducts.quantity;
-      }
+  const updateCartQuantity = async (productId, quantity) => {
+    const updatedCart = cartProducts
+      .map((item) => {
+        if (item.productId === productId) {
+          return { ...item, quantity };
+        }
+        return item;
+      })
+      .filter((item) => item.quantity > 0);
+  
+    setCartProducts(updatedCart);
+  
+    toast.success(quantity === 0 ? "Removed from cart" : "Quantity updated");
+  
+    // ✅ Sync with backend
+    try {
+      await axios.post("/api/cart/set-products-cart", {
+        productId,
+        quantity,
+      });
+    } catch (error) {
+      console.error("Cart update failed:", error);
+      toast.error("Failed to update cart on server");
     }
-    return Math.floor(totalAmount * 100) / 100;
-  }
+  };
+  
+
+  const getCartCount = useCallback(() => {
+    return cartProducts.reduce((total, item) => total + item.quantity, 0);
+  }, [cartProducts]);
+
+  const getCartAmount = useCallback(() => {
+    const total = cartProducts.reduce((sum, item) => {
+      return sum + item.product.price * item.quantity;
+    }, 0);
+    return Math.floor(total * 100) / 100;
+  }, [cartProducts]);
+
 
   const handleBuyNow = (product) => {
     handleAddToCart(product);
     router.push("/cart")
   }
 
-  const fetchCartProducts = async ()=>{
+  const fetchCartProducts = async () => {
     try {
-      const {data} = await axios.get("/api/cart/get-products-cart");
-      setCartProducts(data.products)    
+      const { data } = await axios.get("/api/cart/get-products-cart");
+      setCartProducts(data.products)
       console.log(data.products)
-      console.log("Running ")  
+      console.log("Running ")
     } catch (error) {
       toast.error("Something Went Wrong.")
       console.log(error)
-    } 
+    }
   }
 
-  // useEffect(() => {
-  //   console.log(cartProducts);
-  // }, [cartProducts]);
+  useEffect(() => {
+    fetchCartProducts()
+  }, []);
 
   const values = {
     cartProducts,

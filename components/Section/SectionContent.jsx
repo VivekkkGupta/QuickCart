@@ -4,18 +4,17 @@ import axios from "axios";
 import ProductCard from "@/components/ProductCard/ProductCard";
 import { ChevronsLeftRightEllipsis } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 const SectionContent = () => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const getProductsData = async () => {
+  const getProductsData = useCallback(async () => {
     try {
       const { data } = await axios.get("/api/get-products");
       if (data.error) {
-        console.log("Error occurred: ", error);
         toast.error("Error fetching products");
         return;
       }
@@ -26,11 +25,11 @@ const SectionContent = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getProductsData();
-  }, []);
+  }, [getProductsData]);
 
   return (
     <div className="flex flex-col items-center justify-between gap-4">
