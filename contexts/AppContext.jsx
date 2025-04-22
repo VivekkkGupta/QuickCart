@@ -3,10 +3,9 @@
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { createContext, useContext, Provider, useEffect, useCallback } from "react";
+import { createContext, useContext, useEffect, useCallback } from "react";
 import { useState } from "react";
 import { toast } from "sonner";
-
 
 const AppContext = createContext();
 
@@ -16,6 +15,7 @@ export const AppContextProvider = ({ children }) => {
 
   const [currency, setCurrency] = useState("₹")
   const [cartProducts, setCartProducts] = useState([]);
+  const [cartLoading,setCartLoading] = useState(true)
 
   const router = useRouter()
 
@@ -46,12 +46,12 @@ export const AppContextProvider = ({ children }) => {
       toast.error("Please Login First!");
       return;
     }
-    console.log(product)
+  
     const productId = product.id;
     const existing = cartProducts.find((item) => item.productId === productId);
-
+  
     let updatedCart;
-
+  
     if (existing) {
       updatedCart = cartProducts.map((item) =>
         item.productId === productId
@@ -63,36 +63,55 @@ export const AppContextProvider = ({ children }) => {
       updatedCart = [...cartProducts, { productId, quantity: 1, product }];
       toast.success("Product added to cart");
     }
-
+  
     setCartProducts(updatedCart);
-
+  
     try {
       await axios.post("/api/cart/set-products-cart", {
         productId,
         quantity: existing ? existing.quantity + 1 : 1,
       });
+      return true; 
     } catch (error) {
       console.error("Failed to sync cart:", error);
       toast.error("Failed to update cart on server");
+      return false;
     }
   };
-
-
+  
 
   const updateCartQuantity = async (productId, quantity) => {
+
+    // console.log(productId, quantity)
+
+    if (quantity <= 0) {
+      setCartProducts((prev) =>
+        prev.filter((product) => product.productId !== productId)
+      );
+      toast.success("Product Removed from Cart")
+
+      try {
+        await axios.delete(`/api/cart/delete-products-cart/${productId}`);
+      } catch (error) {
+        console.error("Failed to delete product from server:", error);
+        toast.error("Failed to update server cart");
+      }
+      return;
+    }
+
     const updatedCart = cartProducts
       .map((item) => {
         if (item.productId === productId) {
-          return { ...item, quantity };
+          return { ...item, quantity }
         }
         return item;
       })
       .filter((item) => item.quantity > 0);
-  
+
     setCartProducts(updatedCart);
-  
+
     toast.success(quantity === 0 ? "Removed from cart" : "Quantity updated");
-  
+
     // ✅ Sync with backend
     try {
       await axios.post("/api/cart/set-products-cart", {
@@ -104,7 +123,7 @@ export const AppContextProvider = ({ children }) => {
       toast.error("Failed to update cart on server");
     }
   };
-  
+
 
   const getCartCount = useCallback(() => {
     return cartProducts.reduce((total, item) => total + item.quantity, 0);
@@ -118,30 +137,36 @@ export const AppContextProvider = ({ children }) => {
   }, [cartProducts]);
 
 
-  const handleBuyNow = (product) => {
-    handleAddToCart(product);
-    router.push("/cart")
-  }
+  const handleBuyNow = async (product) => {
+    await handleAddToCart(product);
+    router.push("/cart");
+  };
 
-  const fetchCartProducts = async () => {
+  const fetchCartProducts = useCallback(async () => {
     try {
+      setCartLoading(true)
       const { data } = await axios.get("/api/cart/get-products-cart");
-      setCartProducts(data.products)
-      console.log(data.products)
-      console.log("Running ")
+      setCartProducts(data.products);
     } catch (error) {
-      toast.error("Something Went Wrong.")
-      console.log(error)
+      toast.error("Something went wrong.");
+      console.log(error);
+    } finally{
+      setCartLoading(false)
     }
-  }
+  }, []); 
 
   useEffect(() => {
-    fetchCartProducts()
-  }, []);
+    if (user?.isSignedIn) {
+      fetchCartProducts();
+    } else {
+      setCartProducts([]);
+    }
+  }, [user?.isSignedIn]);
 
   const values = {
     cartProducts,
     setCartProducts,
+    cartLoading,
     getCartCount,
     menuItems,
     routesObject,

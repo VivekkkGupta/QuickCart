@@ -6,6 +6,7 @@ const nextConfig = {
       "source.unsplash.com",
       "raw.githubusercontent.com",
       "ecommerce-cms-41dp.onrender.com",
+       "res.cloudinary.com",
     ],
   },
 };

@@ -3,12 +3,13 @@
 import { addressDummyData } from "@/assets/assets";
 import { useAppContext } from '@/contexts/AppContext';
 import axios from "axios";
+import { LoaderCircle } from "lucide-react";
 import React, { useEffect, useState } from 'react'
 
 
 function OrderSummary() {
 
-  const { router } = useAppContext()
+  const { router, cartLoading } = useAppContext()
   const { currency, getCartCount, getCartAmount } = useAppContext()
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -16,7 +17,7 @@ function OrderSummary() {
 
   const fetchUserAddresses = async () => {
     const { data } = await axios.get("/api/address/get-address")
-    console.log(data.addresses)
+    // console.log(data.addresses)
     setUserAddresses(data.addresses);
   }
 
@@ -26,8 +27,9 @@ function OrderSummary() {
   };
 
   const createOrder = () => {
+    console.log("clicked")
     // Go to the Payment Gateway 
-    router.push('/payment-gateway')
+    // router.push('/payment-gateway')
   }
 
   useEffect(() => {
@@ -36,11 +38,15 @@ function OrderSummary() {
 
   return (
     <div className="w-full md:w-96 bg-gray-500/5 p-5">
+
       <h2 className="text-xl md:text-2xl font-medium text-gray-700">
         Order Summary
       </h2>
+
       <hr className="border-gray-500/30 my-5" />
+
       <div className="space-y-6">
+
         <div>
           <label className="text-base font-medium uppercase text-gray-600 block mb-2">
             Select Address
@@ -104,7 +110,14 @@ function OrderSummary() {
 
         <hr className="border-gray-500/30 my-5" />
 
-        <div className="space-y-4">
+        <div className="space-y-4 relative">
+          {
+            cartLoading && (
+              <div className="w-full h-full z-10 absolute top-0 right-0 flex items-center justify-center backdrop-blur-xs">
+                <LoaderCircle className="animate-spin"/>
+              </div>
+            )
+          }
           <div className="flex justify-between text-base font-medium">
             <p className="uppercase text-gray-600">Items {getCartCount()}</p>
             <p className="text-gray-800">{currency}{getCartAmount()}</p>
@@ -124,7 +137,9 @@ function OrderSummary() {
         </div>
       </div>
 
-      <button onClick={createOrder} className="w-full bg-orange-600 text-white py-3 mt-5 hover:bg-orange-700">
+      <button  onClick={createOrder} className="w-full bg-orange-600 text-white py-3 mt-5 hover:bg-orange-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300"
+      disabled={cartLoading}
+      >
         Place Order
       </button>
     </div>
