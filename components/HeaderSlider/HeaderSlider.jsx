@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { assets } from "@/assets/assets";
 import Image from "next/image";
+import { useAppContext } from "@/contexts/AppContext";
 
 const sliderData = [
   {
@@ -11,6 +12,8 @@ const sliderData = [
     buttonText1: "Buy now",
     buttonText2: "Find more",
     imgSrc: assets.header_headphone_image,
+    category:"headphones",
+    url:"bose-quietcomfort-45"
   },
   {
     id: 2,
@@ -19,6 +22,8 @@ const sliderData = [
     buttonText1: "Shop Now",
     buttonText2: "Explore Deals",
     imgSrc: assets.header_playstation_image,
+    category:"gaming",
+    url:"playstation-5"
   },
   {
     id: 3,
@@ -27,11 +32,14 @@ const sliderData = [
     buttonText1: "Order Now",
     buttonText2: "Learn More",
     imgSrc: assets.header_macbook_image,
+    category:"laptops",
+    url:"mackbook-pro-16"
   },
 ];
 
 const HeaderSlider = () => {
 
+  const {router} = useAppContext()
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
@@ -68,10 +76,10 @@ const HeaderSlider = () => {
                 {slide.title}
               </h1>
               <div className="flex items-center mt-4 md:mt-6 ">
-                <button className="md:px-10 px-7 md:py-2.5 py-2 bg-orange-600 rounded-full text-white font-medium">
+                <button className="md:px-10 px-7 md:py-2.5 py-2 bg-orange-600 rounded-full text-white font-medium" onClick={()=>router.push(`/${slide.category}/${slide.url}`)}>
                   {slide.buttonText1}
                 </button>
-                <button className="group flex items-center gap-2 px-6 py-2.5 font-medium">
+                <button className="group flex items-center gap-2 px-6 py-2.5 font-medium" onClick={()=>router.push(`/${slide.category}`)}>
                   {slide.buttonText2}
                   <Image className="group-hover:translate-x-1 transition" src={assets.arrow_icon} alt="arrow_icon" />
                 </button>

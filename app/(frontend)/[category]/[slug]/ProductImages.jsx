@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Image from "next/image";
 import { ChevronDown, ChevronRight, ChevronLeft, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,7 +8,7 @@ import { BASE_URL } from "@/lib/constants/constants";
 
 const ProductImages = ({ productimages }) => {
 
-  console.log(productimages)
+  // console.log(productimages)
 
   const [selectedImage, setSelectedImage] = useState(productimages[0]);
   const [startIndex, setStartIndex] = useState(0);
@@ -28,6 +28,11 @@ const ProductImages = ({ productimages }) => {
   const visibleImages = productimages.slice(startIndex, startIndex + 4);
   const hasMoreImages = productimages.length > 4;
 
+  // useEffect(() => {
+  //   console.log(selectedImage)
+  // }, [selectedImage])
+  
+
   return (
     <div className="flex flex-col-reverse md:flex-row w-full md:w-1/2 gap-4">
       {/* Thumbnails */}
@@ -39,7 +44,7 @@ const ProductImages = ({ productimages }) => {
               className={`cursor-pointer border-2 rounded-lg overflow-hidden flex items-center justify-center 
                 ${selectedImage === image ? "border-red-500" : "border-transparent"}
               `}
-              onClick={() => setSelectedImage(image.url)}
+              onClick={() => setSelectedImage(image)}
             >
               <Image
                 src={`${image}`}
@@ -73,7 +78,7 @@ const ProductImages = ({ productimages }) => {
             </Button>
 
             {/* Laptop Button  */}
-            <Button
+            {/* <Button
               variant="ghost"
               size="icon"
               className="absolute hidden md:flex -top-2 left-1/2 transform -translate-x-1/2 bg-white/80"
@@ -88,7 +93,7 @@ const ProductImages = ({ productimages }) => {
               onClick={handleNext}
             >
               <ChevronDown className="h-4 w-4" />
-            </Button>
+            </Button> */}
 
           </>
         )}
