@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  next-app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - REDIS_URL=redis://redis-stack:6379
+    depends_on:
+      - redis-stack
+    volumes:
+      - .:/app
+    command: npm start
+
+  redis-stack:
+    image: redis/redis-stack:latest
+    container_name: redis-stack
+    ports:
+      - "6379:6379"     # Redis
+      - "8001:8001"     # RedisInsight UI
+    restart: unless-stopped
+
