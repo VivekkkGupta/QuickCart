@@ -8,9 +8,9 @@ datasource db {
 }
 
 model User {
-  id        String       @id @default(cuid())
-  clerkId   String       @unique
-  email     String       @unique
+  id        String    @id @default(cuid())
+  clerkId   String    @unique
+  email     String    @unique
   name      String?
   phone     String?
   avatar    String?
@@ -19,46 +19,47 @@ model User {
   address   Address[]
   cart      Cart[]
   reviews   Review[]
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
-  isAdmin   Boolean      @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  isAdmin   Boolean   @default(false)
 }
 
 model Product {
-  id          String       @id @default(cuid())
+  id          String   @id @default(cuid())
   name        String
   description String?
-  slug        String    @unique
+  slug        String   @unique
   price       Float
   discount    Float?
   stock       Int
-  category    String?
+  categoryId  Int
   images      String[]
   tags        String[]
   reviews     Review[]
   carts       Cart[]
   orders      Order[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  category    Category @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Order {
-  id         Int         @id @default(autoincrement())
+  id         Int      @id @default(autoincrement())
   userId     String
   productId  String
   quantity   Int
   totalPrice Float
-  status     String      @default("pending")
-  user       User        @relation(fields: [userId], references: [id])
-  product    Product     @relation(fields: [productId], references: [id])
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
+  status     String   @default("pending")
+  user       User     @relation(fields: [userId], references: [id])
+  product    Product  @relation(fields: [productId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model Address {
   id        Int      @id @default(autoincrement())
   name      String
-  phone     String      
+  phone     String
   street    String
   city      String
   state     String
@@ -83,11 +84,19 @@ model Review {
 }
 
 model Cart {
-  id        Int      @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   userId    String
   productId String
   quantity  Int
-  product   Product  @relation(fields: [productId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
-  @@unique([userId, productId]) 
+  product   Product @relation(fields: [productId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
+
+  @@unique([userId, productId])
+}
+
+model Category {
+  id      Int       @id @default(autoincrement())
+  name    String
+  emoji   String?
+  product Product[]
 }

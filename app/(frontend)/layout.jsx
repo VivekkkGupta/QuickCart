@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
           <TopProgressBar/>
           <TopHeader />
           <Header />
-          <div className="flex container w-full">
+          <div className="flex w-full">
             <main className="p-4 w-full max-w-[1240px] mx-auto">{children}</main>
           </div>
           <Footer />

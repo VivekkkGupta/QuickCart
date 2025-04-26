@@ -22,8 +22,8 @@ function ProductCard({ product }) {
 
   if (!product) return <div className="text-center text-red-500">Unable to fetch Products</div>;
 
-  const { name, description, price, discount, images, slug,category } = product;
-  const categoryslug = `${category.toLowerCase()}/${slug.toLowerCase()}`
+  const { name, description, price, discount, images, slug, category } = product;
+  const categoryslug = `${category.name.toLowerCase()}/${slug.toLowerCase()}`
 
   return (
     <div className="relative z-0 flex flex-col w-full md:max-w-[250px] p-2">

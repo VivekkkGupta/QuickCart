@@ -3,8 +3,12 @@ import { NextResponse } from "next/server";
 
 export const GET = async () => {
   try {
-    const products = await prisma.product.findMany();
-    // console.log(products)
+    const products = await prisma.product.findMany({
+      include:{
+        category: true,
+      }
+    });
+    console.log(products)
     return NextResponse.json({
       message: "success",
       products: products,
