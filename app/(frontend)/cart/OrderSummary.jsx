@@ -29,7 +29,7 @@ function OrderSummary() {
   const createOrder = () => {
     console.log("clicked")
     // Go to the Payment Gateway 
-    // router.push('/payment-gateway')
+    router.push('/payment-gateway')
   }
 
   useEffect(() => {

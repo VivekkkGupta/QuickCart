@@ -16,6 +16,7 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useAppContext } from '@/contexts/AppContext'
+import { TruckIcon } from 'lucide-react'
 
 const UserDropdown = ({ firstName, imageUrl }) => {
 
@@ -33,24 +34,24 @@ const UserDropdown = ({ firstName, imageUrl }) => {
                 <DropdownMenuLabel>{firstName}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem asChild>
+                    {/* <DropdownMenuItem asChild>
                         <Link href={routesObject['profile'].path} className="flex gap-4 w-full">
                             <User />
                             <span>Profile</span>
                         </Link>
-                    </DropdownMenuItem>
+                    </DropdownMenuItem> */}
                     <DropdownMenuItem asChild>
                         <Link href={routesObject['orders'].path} className="flex gap-4 w-full">
                             <ShoppingBag />
                             <span>My Orders</span>
                         </Link>
                     </DropdownMenuItem>
-                    {/* <DropdownMenuItem asChild>
-                        <Link href={routesObject['myreview'].path} className="flex gap-4 w-full">
-                            <Star />
-                            <span>My Reviews</span>
+                    <DropdownMenuItem asChild>
+                        <Link href={routesObject['address'].path} className="flex gap-4 w-full">
+                            <TruckIcon />
+                            <span>Address</span>
                         </Link>
-                    </DropdownMenuItem> */}
+                    </DropdownMenuItem>
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>

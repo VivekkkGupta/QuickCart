@@ -7,13 +7,17 @@ import Price from "./Price";
 import StarReviews from "./StarReviews";
 import Link from "next/link";
 import { useAppContext } from "@/contexts/AppContext";
-import { BASE_URL } from "@/lib/constants/constants";
 
 function ProductCard({ product }) {
-  const { handleAddToCart } = useAppContext();
+  const { handleAddToCart ,router} = useAppContext();
 
   const handleCart = async (e, product) => {
     await handleAddToCart(product);
+  };
+
+  const handleBuyNow = async (e, product) => {
+    await handleAddToCart(product);
+    router.push('/cart');
   };
 
   if (!product) return <div className="text-center text-red-500">Unable to fetch Products</div>;
@@ -53,6 +57,11 @@ function ProductCard({ product }) {
           <div className="mt-4 w-full">
             <button
               className="w-full text-xs border-2 rounded-lg px-4 py-2 cursor-pointer hover:shadow-lg transition-all duration-700  text-gray-800"
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                handleBuyNow(e, product);
+              }}
             >
               Buy now
             </button>

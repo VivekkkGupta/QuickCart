@@ -6,6 +6,7 @@ import Footer from "@/components/Footer/Footer";
 import TopHeader from "@/components/TopHeader/TopHeader";
 import { Toaster } from "@/components/ui/sonner";
 import { Providers } from "./providers";
+import TopProgressBar from "@/components/TopProgressBar";
 
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
         <body className={` antialiased `}>
           
           {/* For role = End User */}
+          <TopProgressBar/>
           <TopHeader />
           <Header />
           <div className="flex container w-full">

@@ -153,7 +153,7 @@ function CartProducts() {
 
       {/* Continue Shopping Link */}
       <Link
-        href={"/all-products"}
+        href={"/"}
         className="group flex items-center mt-6 gap-2 text-orange-600"
       >
         <Image

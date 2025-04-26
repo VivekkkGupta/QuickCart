@@ -27,12 +27,12 @@ export const AppContextProvider = ({ children }) => {
   ];
 
   const routesObject = {
-    profile: { name: "Personal Details", path: "/profile/personal-details" },
-    address: { name: "Address Details", path: "/profile/address-details" },
-    payment: { name: "Payment Options", path: "/profile/payment-options" },
-    orders: { name: "Orders History", path: "/profile/orders-history" },
-    returns: { name: "Return History", path: "/profile/return-history" },
-    wishlist: { name: "Wishlist", path: "/profile/wishlist" },
+    profile: { name: "Personal Details", path: "/personal-details" },
+    address: { name: "Address Details", path: "/address" },
+    payment: { name: "Payment Options", path: "/payment-options" },
+    orders: { name: "Orders History", path: "/my-orders" },
+    returns: { name: "Return History", path: "/return-history" },
+    wishlist: { name: "Wishlist", path: "/wishlist" },
     cart: { name: "Cart", path: "/cart" },
     "sign-in": { name: "Sign In", path: "/sign-in" },
     "sign-up": { name: "Sign Up", path: "/sign-up" },
