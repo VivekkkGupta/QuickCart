@@ -16,6 +16,7 @@ export const AppContextProvider = ({ children }) => {
   const [currency, setCurrency] = useState("₹")
   const [cartProducts, setCartProducts] = useState([]);
   const [cartLoading,setCartLoading] = useState(true)
+  const [loading,setLoading] = useState(true)
 
   const router = useRouter()
 
@@ -175,7 +176,9 @@ export const AppContextProvider = ({ children }) => {
     getCartAmount,
     currency, router,
     handleBuyNow,
-    fetchCartProducts
+    fetchCartProducts,
+    loading,
+    setLoading
   };
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 };

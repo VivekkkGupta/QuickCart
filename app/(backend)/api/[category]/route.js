@@ -1,28 +1,31 @@
-import { products } from "@/data/data";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export const GET = async (req, { params }) => {
-  const { slug } = await params; 
-
   try {
-    const product = await prisma.product.findUnique({
+    const { category } = await params;
+
+    const products = await prisma.category.findFirst({
       where: {
-        slug,
+        name: category,
+      },
+      include: {
+        product: {
+          include: {
+            category: true,
+          },
+        },
       },
     });
 
-    if (!product) {
+    if (!products) {
       return NextResponse.json(
-        { message: "failure", error: "No Product found" },
+        { message: "failure", error: "No Products found" },
         { status: 404 }
       );
     }
 
-    return NextResponse.json(
-      { message: "success", product },
-      { status: 200 }
-    );
+    return NextResponse.json({ message: "success", products }, { status: 200 });
   } catch (error) {
     console.error("Prisma Error:", error);
     return NextResponse.json(

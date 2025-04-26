@@ -1,9 +1,14 @@
+'use client'
+import Sidebar from '@/components/seller/Sidebar'
 import React from 'react'
 
-function layout() {
+const Layout = ({ children }) => {
   return (
-    <div>layout</div>
+    <div className='flex w-full'>
+      <Sidebar />
+      {children}
+    </div>
   )
 }
 
-export default layout
+export default Layout
