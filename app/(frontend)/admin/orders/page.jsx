@@ -1,6 +1,5 @@
 'use client';
-import React, { useEffect, useState } from "react";
-import { assets, orderDummyData } from "@/assets/assets";
+import React from "react";
 import Image from "next/image";
 import { useAppContext } from "@/contexts/AppContext";
 
@@ -51,7 +50,6 @@ const Orders = () => {
                     ))}
                 </div>
             </div>}
-            <Footer />
         </div>
     );
 };

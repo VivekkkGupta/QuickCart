@@ -15,7 +15,7 @@ const SectionContent = () => {
   return (
     <div className="flex flex-col items-center justify-between gap-4">
       <div className="relative grid grid-cols-2 md:grid-cols-5 gap-8 items-center justify-center w-full">
-        {isLoading
+        {loading
           ? Array.from({ length: 5 }).map((_, index) => (
               <div
                 key={index}
