@@ -6,30 +6,11 @@ import { ChevronsLeftRightEllipsis } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
+import { useAppContext } from "@/contexts/AppContext";
 
 const SectionContent = () => {
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
-  const getProductsData = useCallback(async () => {
-    try {
-      const { data } = await axios.get("/api/get-products");
-      if (data.error) {
-        toast.error("Error fetching products");
-        return;
-      }
-      setProducts(data.products);
-    } catch (error) {
-      console.log("Error occurred: ", error);
-      toast.error("Error fetching products");
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    getProductsData();
-  }, [getProductsData]);
+  const { loading, products } = useAppContext()
 
   return (
     <div className="flex flex-col items-center justify-between gap-4">

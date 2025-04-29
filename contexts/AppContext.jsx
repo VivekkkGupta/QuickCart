@@ -3,7 +3,7 @@
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useEffect, useCallback } from "react";
+import { createContext, useContext, useEffect, useCallback, use } from "react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -13,12 +13,33 @@ export const useAppContext = () => useContext(AppContext);
 
 export const AppContextProvider = ({ children }) => {
 
+  const [products, setProducts] = useState([])
   const [currency, setCurrency] = useState("₹")
   const [cartProducts, setCartProducts] = useState([]);
-  const [cartLoading,setCartLoading] = useState(true)
-  const [loading,setLoading] = useState(true)
+  const [cartLoading, setCartLoading] = useState(true)
+
+  const [categories, setCategories] = useState([]);
+  const [allOrders, setAllOrders] = useState([]);
+
+  const [loading, setLoading] = useState(true)
 
   const router = useRouter()
+  const user = useUser();
+
+  const fetchCategories = useCallback(
+    async () => {
+      setLoading(true);
+      console.log("Running Functions");
+      try {
+        const { data } = await axios.get('/api/category');
+        setCategories(data.categories);
+      } catch (error) {
+        toast.error("Error fetching categories");
+        console.log("Frontend Error: ", error);
+      } finally {
+        setLoading(false);
+      }
+    }, [])
 
   const menuItems = [
     { name: "Home", path: "/" },
@@ -40,19 +61,18 @@ export const AppContextProvider = ({ children }) => {
     home: { name: "Home", path: "/" },
   };
 
-  const user = useUser();
 
   const handleAddToCart = async (product) => {
     if (!user?.isSignedIn) {
       toast.error("Please Login First!");
       return;
     }
-  
+
     const productId = product.id;
     const existing = cartProducts.find((item) => item.productId === productId);
-  
+
     let updatedCart;
-  
+
     if (existing) {
       updatedCart = cartProducts.map((item) =>
         item.productId === productId
@@ -64,22 +84,21 @@ export const AppContextProvider = ({ children }) => {
       updatedCart = [...cartProducts, { productId, quantity: 1, product }];
       toast.success("Product added to cart");
     }
-  
+
     setCartProducts(updatedCart);
-  
+
     try {
       await axios.post("/api/cart/set-products-cart", {
         productId,
         quantity: existing ? existing.quantity + 1 : 1,
       });
-      return true; 
+      return true;
     } catch (error) {
       console.error("Failed to sync cart:", error);
       toast.error("Failed to update cart on server");
       return false;
     }
   };
-  
 
   const updateCartQuantity = async (productId, quantity) => {
 
@@ -125,7 +144,6 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
-
   const getCartCount = useCallback(() => {
     return cartProducts.reduce((total, item) => total + item.quantity, 0);
   }, [cartProducts]);
@@ -151,10 +169,56 @@ export const AppContextProvider = ({ children }) => {
     } catch (error) {
       toast.error("Something went wrong.");
       console.log(error);
-    } finally{
+    } finally {
       setCartLoading(false)
     }
-  }, []); 
+  }, []);
+
+
+  const getProductsData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get("/api/products");
+      if (data.error) {
+        toast.error("Error fetching products");
+        return;
+      }
+      setProducts(data.products);
+    } catch (error) {
+      console.log("Error occurred: ", error);
+      toast.error("Error fetching products");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  const getAllOrders = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get("/api/all-orders");
+      if (data.error) {
+        toast.error("Error fetching orders");
+        return;
+      }
+      setAllOrders(data.orders);
+    } catch (error) {
+      console.log("Error occurred: ", error);
+      toast.error("Error fetching orders");
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (allOrders.length > 0) return;
+    getAllOrders();
+
+    if (products.length > 0) return;
+    getProductsData();
+
+    if (categories.length > 0) return;
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     if (user?.isSignedIn) {
@@ -178,7 +242,10 @@ export const AppContextProvider = ({ children }) => {
     handleBuyNow,
     fetchCartProducts,
     loading,
-    setLoading
+    setLoading,
+    categories,
+    fetchCategories,
+    products
   };
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 };
