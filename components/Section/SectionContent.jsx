@@ -1,11 +1,6 @@
 "use client";
 
-import axios from "axios";
 import ProductCard from "@/components/ProductCard/ProductCard";
-import { ChevronsLeftRightEllipsis } from "lucide-react";
-import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
-import { toast } from "sonner";
 import { useAppContext } from "@/contexts/AppContext";
 
 const SectionContent = () => {
@@ -31,11 +26,11 @@ const SectionContent = () => {
               <ProductCard key={product.id} product={product} />
             ))}
       </div>
-      <Link href={`/all-products`}>
+      {/* <Link href={`/all-products`}>
         <button className="px-8 py-2 mb-16 border-2 rounded text-gray-500/90 hover:bg-slate-50/90 transition cursor-pointer">
           See more
         </button>
-      </Link>
+      </Link> */}
     </div>
   );
 };
