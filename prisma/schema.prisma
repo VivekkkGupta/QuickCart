@@ -37,25 +37,34 @@ model Product {
   tags        String[]
   reviews     Review[]
   carts       Cart[]
-  orders      Order[]
+  orderItems  OrderItem[]
   category    Category @relation(fields: [categoryId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
 model Order {
-  id         Int      @id @default(autoincrement())
+  id         Int         @id @default(autoincrement())
   userId     String
-  productId  String
   addressId  Int
-  quantity   Int
   totalPrice Float
-  status     String   @default("pending")
-  address    Address  @relation(fields: [addressId], references: [id])
-  user       User     @relation(fields: [userId], references: [id])
-  product    Product  @relation(fields: [productId], references: [id])
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  status     String      @default("pending")
+  address    Address     @relation(fields: [addressId], references: [id])
+  user       User        @relation(fields: [userId], references: [id])
+  items      OrderItem[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model OrderItem {
+  id         Int      @id @default(autoincrement())
+  orderId    Int
+  productId  String
+  quantity   Int
+  price      Float     // price per unit or total of that item
+
+  order      Order     @relation(fields: [orderId], references: [id])
+  product    Product   @relation(fields: [productId], references: [id])
 }
 
 model Address {

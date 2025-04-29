@@ -9,17 +9,9 @@ import React, { useEffect, useState } from 'react'
 
 function OrderSummary() {
 
-  const { router, cartLoading } = useAppContext()
-  const { currency, getCartCount, getCartAmount } = useAppContext()
-  const [selectedAddress, setSelectedAddress] = useState(null);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [userAddresses, setUserAddresses] = useState([]);
+  const { router, cartLoading, placeOrder, currency, getCartCount, getCartAmount, selectedAddress, setSelectedAddress, addresses } = useAppContext()
 
-  const fetchUserAddresses = async () => {
-    const { data } = await axios.get("/api/address/get-address")
-    // console.log(data.addresses)
-    setUserAddresses(data.addresses);
-  }
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleAddressSelect = (address) => {
     setSelectedAddress(address);
@@ -29,12 +21,10 @@ function OrderSummary() {
   const createOrder = () => {
     console.log("clicked")
     // Go to the Payment Gateway 
+    placeOrder()
     router.push('/payment-gateway')
   }
 
-  useEffect(() => {
-    fetchUserAddresses();
-  }, [])
 
   return (
     <div className="w-full md:w-96 bg-gray-500/5 p-5">
@@ -72,7 +62,7 @@ function OrderSummary() {
 
             {isDropdownOpen && (
               <ul className="absolute w-full bg-white border shadow-md mt-1 z-10 py-1.5">
-                {userAddresses.map((address, index) => (
+                {addresses.map((address, index) => (
                   <li
                     key={index}
                     className="px-4 py-2 hover:bg-gray-500/10 cursor-pointer"
@@ -114,7 +104,7 @@ function OrderSummary() {
           {
             cartLoading && (
               <div className="w-full h-full z-10 absolute top-0 right-0 flex items-center justify-center backdrop-blur-xs">
-                <LoaderCircle className="animate-spin"/>
+                <LoaderCircle className="animate-spin" />
               </div>
             )
           }
@@ -137,8 +127,8 @@ function OrderSummary() {
         </div>
       </div>
 
-      <button  onClick={createOrder} className="w-full bg-orange-600 text-white py-3 mt-5 hover:bg-orange-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300"
-      disabled={cartLoading}
+      <button onClick={createOrder} className="w-full bg-orange-600 text-white py-3 mt-5 hover:bg-orange-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300"
+        disabled={cartLoading}
       >
         Place Order
       </button>

@@ -7,13 +7,12 @@ import * as Yup from "yup";
 import { useRef } from "react";
 import { toast } from "sonner";
 import { LoaderCircle } from "lucide-react";
+import { useAppContext } from "@/contexts/AppContext";
 
 const AddAddress = () => {
   const formRef = useRef(null);
 
-  const [addresses, setAddresses] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [apiLoading, setApiLoading] = useState(false);
+  const { loading, setLoading, addresses, fetchAddresses } = useAppContext()
   const [editingAddress, setEditingAddress] = useState(null);
 
   const validationSchema = Yup.object({
@@ -30,31 +29,20 @@ const AddAddress = () => {
       .required("Zip Code is required"),
   });
 
-  const fetchAddresses = async () => {
-    try {
-      const { data } = await axios.get("/api/address/get-address");
-      setAddresses(data.addresses || []);
-    } catch (error) {
-      console.error("Error fetching addresses:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   const onSubmitHandler = async (values, resetForm) => {
 
     try {
       if (editingAddress) {
         // Update existing address
-        setApiLoading(true)
+        setLoading(true)
         await axios.post(`/api/address/update-address/${editingAddress.id}`, values);
         setEditingAddress(null);
-        setApiLoading(false)
       } else {
         // Add new address
-        setApiLoading(true)
-        const {data} = await axios.post("/api/address/add-address", values);
-        setApiLoading(false)
+        setLoading(true)
+        const { data } = await axios.post("/api/address/add-address", values);
+        setLoading(false)
         // console.log(data)
       }
       fetchAddresses();
@@ -63,31 +51,33 @@ const AddAddress = () => {
     } catch (error) {
       console.error("Error saving address:", error);
     }
+    finally {
+      setLoading(false)
+    }
   };
-  
+
   const handleEdit = (address) => {
     setEditingAddress(address);
     if (formRef.current) {
       formRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
-  
+
   const handleDelete = async (id) => {
     try {
-      setApiLoading(true)
+      setLoading(true)
       await axios.post(`/api/address/delete-address/${id}`);
       fetchAddresses();
-      setApiLoading(false)
       toast.success("Successfully Deleted Address")
     } catch (error) {
       console.error("Error deleting address:", error);
       toast.error("Unable to Delete Address")
     }
+    finally {
+      setLoading(false)
+    }
   };
-  
-  useEffect(() => {
-    fetchAddresses();
-  }, []);
+
 
   return (
     <>
@@ -107,8 +97,8 @@ const AddAddress = () => {
                   <div className="mt-4 h-4 bg-gray-300 rounded-md w-3/4"></div>
                   <div className="mt-2 h-3 bg-gray-300 rounded-md w-1/2"></div>
                   <div className="flex gap-4">
-                  <div className="mt-4 h-6 bg-gray-300 rounded-md w-full"></div>
-                  <div className="mt-4 h-6 bg-gray-300 rounded-md w-full"></div>
+                    <div className="mt-4 h-6 bg-gray-300 rounded-md w-full"></div>
+                    <div className="mt-4 h-6 bg-gray-300 rounded-md w-full"></div>
                   </div>
                 </div>
               ))
@@ -254,14 +244,14 @@ const AddAddress = () => {
                 <button
                   type="submit"
                   className="max-w-sm w-full mt-6 bg-orange-600 text-white py-3 hover:bg-orange-700 uppercase transition"
-                  disabled={apiLoading}
+                  disabled={loading}
                 >
-                  {apiLoading ? 
-                  <div className="w-full flex items-center justify-center">
+                  {loading ?
+                    <div className="w-full flex items-center justify-center">
 
-                  <LoaderCircle className="animate-spin"/> 
-                  </div>
-                  : editingAddress ? "Update Address" : "Save Address"}
+                      <LoaderCircle className="animate-spin" />
+                    </div>
+                    : editingAddress ? "Update Address" : "Save Address"}
                 </button>
               </Form>
             )}

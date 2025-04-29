@@ -3,7 +3,7 @@
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useEffect, useCallback, use } from "react";
+import { createContext, useContext, useEffect, useCallback, use, useMemo } from "react";
 import { useState } from "react";
 import { toast } from "sonner";
 
@@ -20,6 +20,8 @@ export const AppContextProvider = ({ children }) => {
 
   const [categories, setCategories] = useState([]);
   const [allOrders, setAllOrders] = useState([]);
+  const [addresses, setAddresses] = useState([])
+  const [selectedAddress,setSelectedAddress] = useState(null)
 
   const [loading, setLoading] = useState(true)
 
@@ -155,6 +157,13 @@ export const AppContextProvider = ({ children }) => {
     return Math.floor(total * 100) / 100;
   }, [cartProducts]);
 
+  const getCartItems = () => {
+    return cartProducts.map(item => ({
+      productId: item.productId,
+      quantity: item.quantity,
+      price: item.product.price
+    }));
+  };
 
   const handleBuyNow = async (product) => {
     await handleAddToCart(product);
@@ -210,15 +219,67 @@ export const AppContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (allOrders.length > 0) return;
-    getAllOrders();
+    console.log(cartProducts)
+  }, [cartProducts])
 
-    if (products.length > 0) return;
-    getProductsData();
+  const placeOrder = async () => {
+    if (!user?.isSignedIn) {
+      toast.error("Please sign in to place an order");
+      return;
+    }
 
-    if (categories.length > 0) return;
-    fetchCategories();
+    if (cartProducts.length === 0) {
+      toast.error("Cart is empty");
+      return;
+    }
+
+
+    try {
+      const orderPayload = {
+        userId: user.user?.id,
+        addressId: addresses.id,
+        products: cartProducts.map((item) => ({
+          productId: item.productId,
+          quantity: item.quantity,
+        })),
+      };
+
+      const { data } = await axios.post("/api/orders", orderPayload);
+
+      if (data.success) {
+        toast.success("Order placed successfully!");
+        setCartProducts([]);
+        router.push("/my-orders");
+      } else {
+        toast.error("Failed to place order");
+      }
+    } catch (error) {
+      console.error("Order placement failed:", error);
+      toast.error("Something went wrong while placing the order");
+    }
+  };
+
+
+
+  const fetchAddresses = async () => {
+    setLoading(true)
+    try {
+      const { data } = await axios.get("/api/address/get-address");
+      setAddresses(data.addresses);
+    } catch (error) {
+      console.error("Error fetching addresses:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (allOrders.length === 0) getAllOrders();
+    if (products.length === 0) getProductsData();
+    if (categories.length === 0) fetchCategories();
+    if (addresses.length === 0) fetchAddresses();
   }, []);
+
 
   useEffect(() => {
     if (user?.isSignedIn) {
@@ -228,24 +289,36 @@ export const AppContextProvider = ({ children }) => {
     }
   }, [user?.isSignedIn]);
 
-  const values = {
+  const values = useMemo(() => ({
     cartProducts,
     setCartProducts,
     cartLoading,
     getCartCount,
-    menuItems,
-    routesObject,
+    getCartAmount,
+    getCartItems, // ✅ Add this
     handleAddToCart,
     updateCartQuantity,
-    getCartAmount,
-    currency, router,
     handleBuyNow,
+    menuItems,
+    routesObject,
     fetchCartProducts,
+    currency,
+    setCurrency, // ✅ Add this
+    router,
     loading,
     setLoading,
     categories,
     fetchCategories,
-    products
-  };
+    products,
+    allOrders, // ✅ Add this if used in dashboard/admin
+    getProductsData, // optional, if used outside
+    getAllOrders, // optional, if used outside
+    placeOrder,
+    addresses,
+    fetchAddresses,
+    selectedAddress,setSelectedAddress
+  }), [cartProducts, cartLoading, loading, categories, products, user])
+
+
   return <AppContext.Provider value={values}>{children}</AppContext.Provider>;
 };
