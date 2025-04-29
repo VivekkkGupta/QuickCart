@@ -2,32 +2,11 @@
 
 import SectionHeading from "@/components/Section/SectionHeading";
 import { useAppContext } from "@/contexts/AppContext";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { toast } from "sonner";
+import React, { useEffect } from "react";
 
 function Page() {
 
-  const { router, loading, setLoading } = useAppContext()
-
-  const [categories, setCategories] = useState([]);
-
-  const fetchCategories = async () => {
-    setLoading(true);
-    try {
-      const { data } = await axios.get('/api/category');
-      setCategories(data.categories);
-    } catch (error) {
-      toast.error("Error fetching categories");
-      console.log("Frontend Error: ", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
+  const { router, loading, categories ,fetchCategories} = useAppContext()
 
   return (
     <div className="flex max-w-[1240px] mx-auto w-full flex-col gap-5 py-20">

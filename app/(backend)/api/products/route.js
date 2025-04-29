@@ -1,9 +1,29 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
+export const GET = async () => {
+  try {
+    const products = await prisma.product.findMany({
+      include: {
+        category: true,
+      }
+    });
+    // console.log(products)
+    return NextResponse.json({
+      message: "success",
+      products: products,
+    }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({
+      message: "failure",
+      error: error,
+    }, { status: 500 });
+  }
+};
+
 export async function POST(request) {
   try {
-    const body = await request.json();  
+    const body = await request.json();
 
     const {
       images,
@@ -15,17 +35,6 @@ export async function POST(request) {
       stock,
       tags,
     } = body;
-    //   {
-    //     "images":["https://res.cloudinary.com/dc7knilfk/image/upload/v1745349853/sm_controller_image_zkaqac.png"],
-    //     "slug":"new-product", // Generate in Backend
-    //     "name":"New Product",
-    //     "description":"New Description",
-    //     "price":"9999",
-    //     "discount":"5",
-    //     "category":"laptops",
-    //     "stock": "10",
-    //     "tags":["laptop"]
-    // }
 
     const slugify = (text) =>
       text

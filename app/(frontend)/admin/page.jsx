@@ -1,20 +1,87 @@
 'use client'
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { assets } from "@/assets/assets";
 import Image from "next/image";
-
+import { useAppContext } from "@/contexts/AppContext";
+import { toast } from "sonner";
+import axios from "axios";
 const AddProduct = () => {
+  const { categories } = useAppContext();
 
   const [files, setFiles] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('Earphone');
-  const [price, setPrice] = useState('');
-  const [offerPrice, setOfferPrice] = useState('');
+  const [price, setPrice] = useState();
+  const [offerPrice, setOfferPrice] = useState();
+  const [stock, setStock] = useState();
+  const [tags, setTags] = useState([]);
+  const [formData, setFormData] = useState({});
+  const [category, setCategory] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleImageUpload = async (file, index) => {
+    setLoading(true);
+  
+    try {
+      // const imageUrl = await uploadImageToCloudinary(file);
+  
+      // const updatedFiles = [...files];
+      // updatedFiles[index] = imageUrl;
+      // setFiles(updatedFiles);
+  
+      toast.success("Image uploaded successfully!");
+    } catch (error) {
+      toast.error("Error uploading image.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRemoveImage = (index) => {
+    const updatedFiles = [...files];
+    updatedFiles.splice(index, 1);
+    setFiles(updatedFiles);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!name || !description || !price || !offerPrice || !stock || !category) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    const images =
+      files.length === 0
+        ? [
+            "https://res.cloudinary.com/dc7knilfk/image/upload/v1745910888/640px-Product_sample_icon_picture_zqtyq2.png",
+          ]
+        : files;
+
+    const finalTags = tags.length === 0 ? [name] : tags;
+
+    setFormData({
+      name,
+      description,
+      price,
+      discount: offerPrice,
+      category,
+      stock,
+      slug: name.toLowerCase().replace(/\s+/g, "-"),
+      images,
+      tags: finalTags,
+    });
+
+    console.log("Form Data Submitted:", {
+      name,
+      description,
+      price,
+      discount: offerPrice,
+      category,
+      stock,
+      images,
+      tags: finalTags,
+    });
   };
 
   return (
@@ -23,25 +90,42 @@ const AddProduct = () => {
         <div>
           <p className="text-base font-medium">Product Image</p>
           <div className="flex flex-wrap items-center gap-3 mt-2">
-
-            {[...Array(4)].map((_, index) => (
-              <label key={index} htmlFor={`image${index}`}>
-                <input onChange={(e) => {
-                  const updatedFiles = [...files];
-                  updatedFiles[index] = e.target.files[0];
-                  setFiles(updatedFiles);
-                }} type="file" id={`image${index}`} hidden />
-                <Image
-                  key={index}
-                  className="max-w-24 cursor-pointer"
-                  src={files[index] ? URL.createObjectURL(files[index]) : assets.upload_area}
-                  alt=""
-                  width={100}
-                  height={100}
-                />
-              </label>
+            {[...Array(6)].map((_, index) => (
+              <div key={index} className="relative">
+                <label htmlFor={`image${index}`}>
+                  <input
+                    onChange={(e) => {
+                      if (e.target.files[0]) {
+                        handleImageUpload(e.target.files[0], index);
+                      }
+                    }}
+                    type="file"
+                    id={`image${index}`}
+                    hidden
+                  />
+                  <Image
+                    className="max-w-24 cursor-pointer"
+                    src={
+                      files[index]
+                        ? files[index]
+                        : assets.upload_area
+                    }
+                    alt=""
+                    width={100}
+                    height={100}
+                  />
+                </label>
+                {files[index] && (
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveImage(index)}
+                    className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center"
+                  >
+                    &times;
+                  </button>
+                )}
+              </div>
             ))}
-
           </div>
         </div>
         <div className="flex flex-col gap-1 max-w-md">
@@ -84,15 +168,12 @@ const AddProduct = () => {
               id="category"
               className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
               onChange={(e) => setCategory(e.target.value)}
-              defaultValue={category}
             >
-              <option value="Earphone">Earphone</option>
-              <option value="Headphone">Headphone</option>
-              <option value="Watch">Watch</option>
-              <option value="Smartphone">Smartphone</option>
-              <option value="Laptop">Laptop</option>
-              <option value="Camera">Camera</option>
-              <option value="Accessories">Accessories</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
             </select>
           </div>
           <div className="flex flex-col gap-1 w-32">
@@ -111,7 +192,7 @@ const AddProduct = () => {
           </div>
           <div className="flex flex-col gap-1 w-32">
             <label className="text-base font-medium" htmlFor="offer-price">
-              Offer Price
+              Discount %
             </label>
             <input
               id="offer-price"
@@ -124,11 +205,42 @@ const AddProduct = () => {
             />
           </div>
         </div>
-        <button type="submit" className="px-8 py-2.5 bg-orange-600 text-white font-medium rounded">
-          ADD
+        <div className="flex flex-col gap-1 w-32">
+          <label className="text-base font-medium" htmlFor="stock-unit">
+            Stock Unit
+          </label>
+          <input
+            id="stock-unit"
+            type="number"
+            placeholder="0"
+            className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
+            onChange={(e) => setStock(e.target.value)}
+            value={stock}
+            required
+          />
+        </div>
+
+        <div className="flex flex-col gap-1 w-full">
+          <label className="text-base font-medium" htmlFor="tags">
+            Tags (comma separated)
+          </label>
+          <input
+            id="tags"
+            type="text"
+            placeholder="Type here"
+            className="outline-none  w-full md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
+            onChange={(e) => setTags(e.target.value.split(","))}
+            value={tags}
+          />
+        </div>
+        <button
+          type="submit"
+          className="px-8 py-2.5 bg-orange-600 text-white font-medium rounded"
+          disabled={loading}
+        >
+          {loading ? "Uploading..." : "ADD"}
         </button>
       </form>
-      {/* <Footer /> */}
     </div>
   );
 };

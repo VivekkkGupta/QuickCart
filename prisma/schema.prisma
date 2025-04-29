@@ -47,9 +47,11 @@ model Order {
   id         Int      @id @default(autoincrement())
   userId     String
   productId  String
+  addressId  Int
   quantity   Int
   totalPrice Float
   status     String   @default("pending")
+  address    Address  @relation(fields: [addressId], references: [id])
   user       User     @relation(fields: [userId], references: [id])
   product    Product  @relation(fields: [productId], references: [id])
   createdAt  DateTime @default(now())
@@ -66,6 +68,7 @@ model Address {
   country   String
   zipCode   String
   userId    String
+  order     Order[]
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
