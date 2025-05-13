@@ -19,7 +19,7 @@ export const AppContextProvider = ({ children }) => {
   const [cartLoading, setCartLoading] = useState(true)
 
   const [categories, setCategories] = useState([]);
-  const [allOrders, setAllOrders] = useState([]);
+  // const [allOrders, setAllOrders] = useState([]);
   const [addresses, setAddresses] = useState([])
   const [selectedAddress,setSelectedAddress] = useState(null)
 
@@ -201,22 +201,22 @@ export const AppContextProvider = ({ children }) => {
     }
   }, []);
 
-  const getAllOrders = useCallback(async () => {
-    setLoading(true);
-    try {
-      const { data } = await axios.get("/api/orders");
-      if (data.error) {
-        toast.error("Error fetching orders");
-        return;
-      }
-      setAllOrders(data.orders);
-    } catch (error) {
-      console.log("Error occurred: ", error);
-      toast.error("Error fetching orders");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  // const getAllOrders = useCallback(async () => {
+  //   setLoading(true);
+  //   try {
+  //     const { data } = await axios.get("/api/orders");
+  //     if (data.error) {
+  //       toast.error("Error fetching orders");
+  //       return;
+  //     }
+  //     setAllOrders(data.orders);
+  //   } catch (error) {
+  //     console.log("Error occurred: ", error);
+  //     toast.error("Error fetching orders");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }, []);
 
   // useEffect(() => {
   //   console.log(cartProducts)
@@ -280,6 +280,7 @@ export const AppContextProvider = ({ children }) => {
   useEffect(() => {
     if (user?.isSignedIn) {
       fetchCartProducts();
+      
     } else {
       setCartProducts([]);
     }
@@ -306,9 +307,9 @@ export const AppContextProvider = ({ children }) => {
     categories,
     fetchCategories,
     products,
-    allOrders, // ✅ Add this if used in dashboard/admin
+    // allOrders, // ✅ Add this if used in dashboard/admin
     getProductsData, // optional, if used outside
-    getAllOrders, // optional, if used outside
+    // getAllOrders, // optional, if used outside
     placeOrder,
     addresses,
     fetchAddresses,
