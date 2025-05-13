@@ -204,7 +204,7 @@ export const AppContextProvider = ({ children }) => {
   const getAllOrders = useCallback(async () => {
     setLoading(true);
     try {
-      const { data } = await axios.get("/api/all-orders");
+      const { data } = await axios.get("/api/orders");
       if (data.error) {
         toast.error("Error fetching orders");
         return;
@@ -223,39 +223,35 @@ export const AppContextProvider = ({ children }) => {
   }, [cartProducts])
 
   const placeOrder = async () => {
-    if (!user?.isSignedIn) {
-      toast.error("Please sign in to place an order");
-      return;
-    }
-
-    if (cartProducts.length === 0) {
-      toast.error("Cart is empty");
-      return;
-    }
-
+    setCartLoading(true);
 
     try {
       const orderPayload = {
         userId: user.user?.id,
-        addressId: addresses.id,
+        addressId: selectedAddress.id,
         products: cartProducts.map((item) => ({
           productId: item.productId,
           quantity: item.quantity,
         })),
       };
 
+      // console.log("Order Payload: ", orderPayload);
       const { data } = await axios.post("/api/orders", orderPayload);
-
-      if (data.success) {
+      console.log("Order Response: ", data);
+      if (data.order) {
         toast.success("Order placed successfully!");
         setCartProducts([]);
         router.push("/my-orders");
       } else {
         toast.error("Failed to place order");
+        setCartLoading(false);
       }
     } catch (error) {
       console.error("Order placement failed:", error);
       toast.error("Something went wrong while placing the order");
+    }
+    finally {
+      setCartLoading(false);
     }
   };
 

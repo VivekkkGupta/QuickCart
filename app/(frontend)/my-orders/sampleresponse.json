@@ -1,0 +1,129 @@
+{
+    "id": "17664265-b508-4387-a29a-f1cb16ffc48f",
+    "userId": "21324-34325432-332",
+    "addressId": 10,
+    "totalPrice": 628569,
+    "status": "pending",
+    "createdAt": "2025-05-13T10:32:55.734Z",
+    "updatedAt": "2025-05-13T10:32:55.734Z",
+    "address": {
+        "id": 10,
+        "name": "Vivek Kumar Gupta",
+        "phone": "9970473607",
+        "street": "498, Sagar Apt, Kombadpada",
+        "city": "Bhiwandi, Thane",
+        "state": "Maharashtra",
+        "country": "India",
+        "zipCode": "421302",
+        "userId": "21324-34325432-332",
+        "createdAt": "2025-04-22T17:24:14.691Z",
+        "updatedAt": "2025-04-22T17:24:32.512Z"
+    },
+    "items": [
+        {
+            "id": "ff9df55e-8b36-4375-9aad-d1a7f783b44c",
+            "orderId": "17664265-b508-4387-a29a-f1cb16ffc48f",
+            "quantity": 1,
+            "price": 51999,
+            "productId": "123-456-004",
+            "product": {
+                "id": "123-456-004",
+                "name": "PlayStation 5",
+                "description": "The PlayStation 5 takes gaming to the next level with ultra-HD graphics, a powerful 825GB SSD, and ray tracing technology for realistic visuals. Whether you're into high-action games or immersive storytelling, the PS5 delivers fast loading times, seamless gameplay, and stunning visuals. It's a must-have for any serious gamer looking for the ultimate gaming experience.",
+                "slug": "playstation-5",
+                "price": 51999,
+                "discount": 5,
+                "stock": 5,
+                "categoryId": 1,
+                "images": [
+                    "https://res.cloudinary.com/dc7knilfk/image/upload/v1745349852/playstation_image_f2soz4.png"
+                ],
+                "tags": [
+                    "gaming",
+                    "electronics"
+                ],
+                "createdAt": "2025-04-24T18:25:21.625Z",
+                "updatedAt": "2025-04-26T13:12:19.616Z"
+            }
+        },
+        {
+            "id": "afa0816a-e3ea-458b-8045-0ccb75eb8afc",
+            "orderId": "17664265-b508-4387-a29a-f1cb16ffc48f",
+            "quantity": 1,
+            "price": 358999,
+            "productId": "123-456-006",
+            "product": {
+                "id": "123-456-006",
+                "name": "Canon EOS R5",
+                "description": "The Canon EOS R5 is a game-changing mirrorless camera with a 45MP full-frame sensor, offering ultra-high resolution and the ability to shoot 8K video. Whether you're capturing professional-quality stills or cinematic video footage, this camera delivers exceptional clarity, speed, and color accuracy. With advanced autofocus and in-body stabilization, the R5 is ideal for photographers and videographers alike.",
+                "slug": "canon-eos-r5",
+                "price": 358999,
+                "discount": 5,
+                "stock": 5,
+                "categoryId": 3,
+                "images": [
+                    "https://res.cloudinary.com/dc7knilfk/image/upload/v1745349850/cannon_camera_image_gj04iq.png"
+                ],
+                "tags": [
+                    "cameras",
+                    "electronics"
+                ],
+                "createdAt": "2025-04-24T18:31:40.914Z",
+                "updatedAt": "2025-04-26T13:14:23.265Z"
+            }
+        },
+        {
+            "id": "f96a5978-eaa8-4050-8bb9-7e45f04b8e37",
+            "orderId": "17664265-b508-4387-a29a-f1cb16ffc48f",
+            "quantity": 1,
+            "price": 187572,
+            "productId": "123-456-007",
+            "product": {
+                "id": "123-456-007",
+                "name": "ASUS ROG Zephyrus G16",
+                "description": "The ASUS ROG Zephyrus G16 gaming laptop is powered by the Intel Core i9 processor and features an RTX 4070 GPU, delivering top-tier gaming and performance. With 16GB of RAM and a 1TB SSD, this laptop is designed for gamers who demand extreme power, speed, and storage. Equipped with a stunning 16-inch display, it's built to handle the most demanding titles and applications with ease.",
+                "slug": "asus-rog-zephyrus-g16",
+                "price": 187572,
+                "discount": 8,
+                "stock": 2,
+                "categoryId": 4,
+                "images": [
+                    "https://res.cloudinary.com/dc7knilfk/image/upload/v1745349850/asus_laptop_image_pidgmo.png"
+                ],
+                "tags": [
+                    "laptops",
+                    "electronics"
+                ],
+                "createdAt": "2025-04-24T18:20:14.993Z",
+                "updatedAt": "2025-04-26T13:13:23.940Z"
+            }
+        },
+        {
+            "id": "83fd9a32-62d8-46bc-8ecc-1d40ad8355fa",
+            "orderId": "17664265-b508-4387-a29a-f1cb16ffc48f",
+            "quantity": 1,
+            "price": 29999,
+            "productId": "123-456-009",
+            "product": {
+                "id": "123-456-009",
+                "name": "Sony WF-1000XM5",
+                "description": "Sony WF-1000XM5 true wireless earbuds deliver immersive sound with Hi-Res Audio and advanced noise cancellation technology. Designed for comfort and quality, they provide a stable, snug fit for a secure listening experience. Whether you're working out or traveling, these earbuds will keep you connected with the world around you while enjoying rich, clear sound.",
+                "slug": "sony-wf-1000xm5",
+                "price": 29999,
+                "discount": 5,
+                "stock": 10,
+                "categoryId": 123456,
+                "images": [
+                    "https://res.cloudinary.com/dc7knilfk/image/upload/v1745349853/sony_airbuds_image_obrvgw.png"
+                ],
+                "tags": [
+                    "earphones",
+                    "electronics",
+                    "sony"
+                ],
+                "createdAt": "2025-04-24T18:36:40.281Z",
+                "updatedAt": "2025-04-26T13:13:23.957Z"
+            }
+        }
+    ]
+}

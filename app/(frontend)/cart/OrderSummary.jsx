@@ -5,6 +5,7 @@ import { useAppContext } from '@/contexts/AppContext';
 import axios from "axios";
 import { LoaderCircle } from "lucide-react";
 import React, { useEffect, useState } from 'react'
+import { toast } from "sonner";
 
 
 function OrderSummary() {
@@ -20,9 +21,21 @@ function OrderSummary() {
 
   const createOrder = () => {
     console.log("clicked")
-    // Go to the Payment Gateway 
+    if(getCartCount() === 0) {
+      toast.error("Your cart is empty")
+      return
+    }
+    if(selectedAddress === null) {
+      toast.error("Please select an address")
+      return
+    }
+    if(cartLoading) {
+      toast.error("Please wait, your cart is being updated")
+      return
+    }
+    
     placeOrder()
-    router.push('/payment-gateway')
+    // router.push('/payment-gateway')
   }
 
 

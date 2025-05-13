@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useAppContext } from "@/contexts/AppContext";
 import { toast } from "sonner";
 import axios from "axios";
+import { CircleX } from "lucide-react";
+
 const AddProduct = () => {
   const { categories } = useAppContext();
 
@@ -19,16 +21,16 @@ const AddProduct = () => {
   const [category, setCategory] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleImageUpload = async (file, index) => {
+  const handleImageUpload = async () => {
     setLoading(true);
-  
+
     try {
       // const imageUrl = await uploadImageToCloudinary(file);
-  
+
       // const updatedFiles = [...files];
       // updatedFiles[index] = imageUrl;
       // setFiles(updatedFiles);
-  
+
       toast.success("Image uploaded successfully!");
     } catch (error) {
       toast.error("Error uploading image.");
@@ -37,14 +39,21 @@ const AddProduct = () => {
     }
   };
 
+  const handleImageChange = (e) => {
+    setFiles([...files, e.target.files[0]])
+  }
+  useEffect(() => {
+    console.log(files)
+  }, [files])
+
   const handleRemoveImage = (index) => {
-    const updatedFiles = [...files];
-    updatedFiles.splice(index, 1);
+    const updatedFiles = files.filter((_, i) => i !== index);
     setFiles(updatedFiles);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    handleImageUpload()
 
     if (!name || !description || !price || !offerPrice || !stock || !category) {
       alert("Please fill in all required fields.");
@@ -54,8 +63,8 @@ const AddProduct = () => {
     const images =
       files.length === 0
         ? [
-            "https://res.cloudinary.com/dc7knilfk/image/upload/v1745910888/640px-Product_sample_icon_picture_zqtyq2.png",
-          ]
+          "https://res.cloudinary.com/dc7knilfk/image/upload/v1745910888/640px-Product_sample_icon_picture_zqtyq2.png",
+        ]
         : files;
 
     const finalTags = tags.length === 0 ? [name] : tags;
@@ -90,7 +99,7 @@ const AddProduct = () => {
         <div>
           <p className="text-base font-medium">Product Image</p>
           <div className="flex flex-wrap items-center gap-3 mt-2">
-            {[...Array(6)].map((_, index) => (
+            {/* {[...Array(6)].map((_, index) => (
               <div key={index} className="relative">
                 <label htmlFor={`image${index}`}>
                   <input
@@ -124,6 +133,40 @@ const AddProduct = () => {
                     &times;
                   </button>
                 )}
+              </div>
+            ))} */}
+
+            <label htmlFor="image">
+              <input type="file" id="image" onChange={handleImageChange} hidden />
+              <Image
+                className="max-w-24 cursor-pointer"
+                src={assets.upload_area}
+                alt=""
+
+                width={100}
+                height={100}
+              />
+            </label>
+          </div>
+          <div className="flex flex-col gap-1 mt-2">
+
+            {files.map((file, index) => (
+              <div key={index} className="w-full bg-gray-200 h-20 rounded-md flex items-center justify-between overflow-hidden px-5">
+                <Image
+                  className="max-w-20 rounded-md p-1"
+                  src={URL.createObjectURL(file)}
+                  alt=""
+                  width={100}
+                  height={100}
+                />
+                <p className="text-sm font-medium px-2">{file.name}</p>
+                <button
+                  type="button"
+                  onClick={() => handleRemoveImage(index)}
+                  className="text-red-500 rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
+                >
+                  <CircleX />
+                </button>
               </div>
             ))}
           </div>

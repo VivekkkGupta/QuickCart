@@ -88,7 +88,7 @@ const AddAddress = () => {
             Your <span className="font-semibold text-orange-600">Addresses</span>
           </p>
           <div className="space-y-6 mt-6">
-            {isLoading ? (
+            {loading ? (
               Array.from({ length: 3 }).map((_, index) => (
                 <div
                   key={index}
