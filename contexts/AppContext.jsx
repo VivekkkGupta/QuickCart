@@ -270,7 +270,7 @@ export const AppContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (allOrders.length === 0) getAllOrders();
+    // if (allOrders.length === 0) getAllOrders();
     if (products.length === 0) getProductsData();
     if (categories.length === 0) fetchCategories();
     if (addresses.length === 0) fetchAddresses();
