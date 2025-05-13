@@ -31,7 +31,7 @@ export const AppContextProvider = ({ children }) => {
   const fetchCategories = useCallback(
     async () => {
       setLoading(true);
-      console.log("Running Functions");
+      // console.log("Running Functions");
       try {
         const { data } = await axios.get('/api/category');
         setCategories(data.categories);
@@ -218,9 +218,9 @@ export const AppContextProvider = ({ children }) => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(cartProducts)
-  }, [cartProducts])
+  // useEffect(() => {
+  //   console.log(cartProducts)
+  // }, [cartProducts])
 
   const placeOrder = async () => {
     setCartLoading(true);
@@ -237,7 +237,7 @@ export const AppContextProvider = ({ children }) => {
 
       // console.log("Order Payload: ", orderPayload);
       const { data } = await axios.post("/api/orders", orderPayload);
-      console.log("Order Response: ", data);
+      // console.log("Order Response: ", data);
       if (data.order) {
         toast.success("Order placed successfully!");
         setCartProducts([]);

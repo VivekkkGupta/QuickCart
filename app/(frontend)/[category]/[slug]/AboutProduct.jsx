@@ -39,9 +39,9 @@ const AboutProduct = ({ currentproduct }) => {
   const handleCart = async (product) => {
     await handleAddToCart(product);
   };
-  const handleAddToWishlist = (e) => {
-    console.log("Added to WishList");
-  };
+  // const handleAddToWishlist = (e) => {
+  //   console.log("Added to WishList");
+  // };
 
   return (
     <>
@@ -54,7 +54,7 @@ const AboutProduct = ({ currentproduct }) => {
             rating={AverageRating}
             reviewsCount={ReviewCount}
           /> */}
-          |
+          
           {InStock ? (
             <span className="text-sm text-green-500">In Stock</span>
           ) : (

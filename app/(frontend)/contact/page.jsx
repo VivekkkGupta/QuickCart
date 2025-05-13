@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 function Page() {
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("Form Submitted");
+    // console.log("Form Submitted");
   };
 
   return (

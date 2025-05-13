@@ -20,7 +20,7 @@ function OrderSummary() {
   };
 
   const createOrder = () => {
-    console.log("clicked")
+    // console.log("clicked")
     if(getCartCount() === 0) {
       toast.error("Your cart is empty")
       return

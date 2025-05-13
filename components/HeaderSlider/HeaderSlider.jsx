@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { assets } from "@/assets/assets";
 import Image from "next/image";
-import { useAppContext } from "@/contexts/AppContext";
+import { useRouter } from "next/navigation"; // Import useRouter from next/navigation
 
 const sliderData = [
   {
@@ -38,18 +38,15 @@ const sliderData = [
 ];
 
 const HeaderSlider = () => {
-
-  const {router} = useAppContext()
+  const router = useRouter(); // Use Next.js router
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % sliderData.length);
     }, 3000);
-    return () =>{
-      clearInterval(interval)
-      console.log("Cleared the interval");
-      
+    return () => {
+      clearInterval(interval);
     };
   }, []);
 
@@ -76,10 +73,16 @@ const HeaderSlider = () => {
                 {slide.title}
               </h1>
               <div className="flex items-center mt-4 md:mt-6 ">
-                <button className="md:px-10 px-7 md:py-2.5 py-2 bg-orange-600 rounded-full text-white font-medium" onClick={()=>router.push(`/${slide.category}/${slide.url}`)}>
+                <button
+                  className="md:px-10 px-7 md:py-2.5 py-2 bg-orange-600 rounded-full text-white font-medium shadow-md hover:bg-orange-700 transition duration-300 cursor-pointer"
+                  onClick={() => router.push(`/${slide.category}/${slide.url}`)}
+                >
                   {slide.buttonText1}
                 </button>
-                <button className="group flex items-center gap-2 px-6 py-2.5 font-medium" onClick={()=>router.push(`/${slide.category}`)}>
+                <button
+                  className="group flex items-center gap-2 px-6 py-2.5 font-medium"
+                  onClick={() => router.push(`/${slide.category}`)}
+                >
                   {slide.buttonText2}
                   <Image className="group-hover:translate-x-1 transition" src={assets.arrow_icon} alt="arrow_icon" />
                 </button>
