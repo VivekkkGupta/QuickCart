@@ -29,6 +29,16 @@ function Footer() {
                                 Cart
                             </Link>
                         </li>
+                        <li>
+                            <Link href={'/my-orders'}>
+                                My Orders
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href={'/address'}>
+                                Address
+                            </Link>
+                        </li>
                     </ul>
                 </div>
 
@@ -65,10 +75,8 @@ function Footer() {
 
                     {/* Social Icons */}
                     <div className="flex gap-3 mt-4 items-center justify-center md:justify-start w-full">
-                        <Facebook className="text-gray-400 hover:text-white cursor-pointer" />
-                        <Twitter className="text-gray-400 hover:text-white cursor-pointer" />
-                        <Instagram className="text-gray-400 hover:text-white cursor-pointer" />
-                        <Linkedin className="text-gray-400 hover:text-white cursor-pointer" />
+                        <a href="https://www.instagram.com/vivekguptaaa/" target='_blank'><Instagram className="text-gray-400 hover:text-white cursor-pointer" /></a>
+                        <a href="https://www.linkedin.com/in/vivekguptaaa/" target='_blank'><Linkedin className="text-gray-400 hover:text-white cursor-pointer" /></a>
                     </div>
                 </div>
             </div>
