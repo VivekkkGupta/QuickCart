@@ -143,7 +143,7 @@ const page = () => {
                   <div className="w-64 flex items-start">
                     <p>
                       <span className="font-medium">
-                        {order.address.name} - {order.address.phone}
+                        {order?.address?.name} - {order?.address?.phone}
                       </span>
                       <br />
                       <br />

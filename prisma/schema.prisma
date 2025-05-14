@@ -47,8 +47,8 @@ model Order {
   id         String         @id @default(uuid())
   userId     String
   user       User        @relation(fields: [userId], references: [id])
-  address    Address?    @relation(fields: [addressId], references: [id])
-  addressId  Int?
+  address    Address     @relation(fields: [addressId], references: [id])
+  addressId  Int
   totalPrice Float
   status     String      @default("pending")
   items      OrderItem[]
