@@ -25,23 +25,8 @@ function Footer() {
                     <h3 className="text-white font-semibold text-lg">Account</h3>
                     <ul className="mt-2 space-y-1 text-gray-400">
                         <li>
-                            <Link href={routesObject["profile"].path}>
-                                My Account
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href={"/login"}>
-                                Login / Register
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href={routesObject["cart"].path || '/profile/cart'}>
+                            <Link href={'/cart'}>
                                 Cart
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href={routesObject["wishlist"].path}>
-                                Wishlist
                             </Link>
                         </li>
                     </ul>
@@ -51,9 +36,21 @@ function Footer() {
                 <div>
                     <h3 className="text-white font-semibold text-lg">Quick Links</h3>
                     <ul className="mt-2 space-y-1 text-gray-400">
-                        <li>Privacy Policy</li>
-                        <li>Terms Of Use</li>
-                        <li>FAQ</li>
+                        <li>
+                            <Link href={"/privacy-policy"}>
+                                Privacy Policy
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href={"/terms-and-conditions"}>
+                                Terms & Conditions
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href={"/about"}>
+                                About
+                            </Link>
+                        </li>
                         <li>
                             <Link href={"/contact"}>
                                 Contact
@@ -79,7 +76,10 @@ function Footer() {
             {/* Copyright */}
             <div className="text-center text-gray-500 py-4 border-t border-gray-700">
                 &copy; {currentYear} {APP_NAME}. All rights reserved.
+                <br/>
+                Developed by <a href="https://developervivek.com" target="_blank" rel="noopener noreferrer" className="text-orange-500 hover:underline">Vivek Kumar Gupta</a>
             </div>
+            
         </footer>
     );
 }
