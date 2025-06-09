@@ -23,8 +23,7 @@ const UserDropdown = ({ firstName, imageUrl }) => {
     if (loggingOut) {
         return (
             <div className="flex items-center justify-center w-40 h-40">
-                <span className="animate-spin rounded-full border-4 border-orange-600 border-t-transparent h-8 w-8"></span>
-                <span className="ml-3 text-orange-600 font-medium">Logging out...</span>
+                <span className="animate-spin rounded-full border-4 border-orange-600 border-t-transparent h-10 w-10"></span>
             </div>
         );
     }
@@ -58,10 +57,12 @@ const UserDropdown = ({ firstName, imageUrl }) => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                     <SignOutButton
-                        redirectUrl="/"
-                        signOutCallback={() => setLoggingOut(true)}
+                        afterSignOutUrl="/"
                     >
-                        <div className='flex gap-4 w-full items-center cursor-pointer '>
+                        <div
+                            className='flex gap-4 w-full items-center cursor-pointer'
+                            onClick={() => setLoggingOut(true)}
+                        >
                             <LogOut />
                             <span>Log out</span>
                         </div>

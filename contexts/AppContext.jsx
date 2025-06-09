@@ -21,12 +21,13 @@ export const AppContextProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   // const [allOrders, setAllOrders] = useState([]);
   const [addresses, setAddresses] = useState([])
-  const [selectedAddress,setSelectedAddress] = useState(null)
+  const [selectedAddress, setSelectedAddress] = useState(null)
 
   const [loading, setLoading] = useState(true)
 
   const router = useRouter()
   const user = useUser();
+    const { isSignedIn } = useAuth();
 
   const fetchCategories = useCallback(
     async () => {
@@ -255,8 +256,6 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
-
-
   const fetchAddresses = async () => {
     setLoading(true)
     try {
@@ -269,29 +268,32 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
+
+
+  // Only log when loaded, and only once per change
   useEffect(() => {
-    // if (allOrders.length === 0) getAllOrders();
-    if (products.length === 0) getProductsData();
-    if (categories.length === 0) fetchCategories();
-    // if (addresses.length === 0) fetchAddresses();
-  }, []);
-
-  const { isSignedIn } = useAuth();
-
-
-  useEffect(() => {
-    if (isSignedIn) {
-      fetch("/api/auth/sync-user", { method: "POST" }); 
+    if (user.isLoaded) {
+      console.log(isSignedIn, user?.isSignedIn, "User Sign In Status");
     }
-    if (user?.isSignedIn) {
+  }, [isSignedIn, user?.isSignedIn, user.isLoaded]);
+
+  // Sync user only when signed in and loaded
+  useEffect(() => {
+    if (user.isLoaded && isSignedIn) {
+      fetch("/api/auth/sync-user", { method: "POST" });
+    }
+  }, [isSignedIn, user.isLoaded]);
+
+  // Fetch cart and addresses only when signed in
+  useEffect(() => {
+    if (user.isLoaded && user.isSignedIn) {
       fetchCartProducts();
       fetchAddresses();
-      
-    } else {
+    } else if (user.isLoaded && !user.isSignedIn) {
       setAddresses([]);
       setCartProducts([]);
     }
-  }, [user?.isSignedIn]);
+  }, [user.isSignedIn, user.isLoaded]);
 
   const values = useMemo(() => ({
     cartProducts,
@@ -320,7 +322,7 @@ export const AppContextProvider = ({ children }) => {
     placeOrder,
     addresses,
     fetchAddresses,
-    selectedAddress,setSelectedAddress
+    selectedAddress, setSelectedAddress
   }), [cartProducts, cartLoading, loading, categories, products, user])
 
 

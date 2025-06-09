@@ -7,7 +7,7 @@ export default function Page() {
     return (
         <div className='flex w-full items-center justify-center max-w-[1240px] mx-auto'>
             <div className='w-1/2 hidden md:block  overflow-hidden'>
-                <Image src={'/authImages/auth-page-image.png'} width={600} height={100} alt='Quick-Cart-Auth-Image' />
+                <Image src={'/authImages/auth-page-image.png'} width={600} height={600} alt='Quick-Cart-Auth-Image' />
             </div>
             <div className='md:w-1/2 w-full flex items-center justify-center'>
                 {
