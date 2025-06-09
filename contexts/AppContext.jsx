@@ -273,22 +273,22 @@ export const AppContextProvider = ({ children }) => {
     // if (allOrders.length === 0) getAllOrders();
     if (products.length === 0) getProductsData();
     if (categories.length === 0) fetchCategories();
-    if (addresses.length === 0) fetchAddresses();
+    // if (addresses.length === 0) fetchAddresses();
   }, []);
 
   const { isSignedIn } = useAuth();
 
-  useEffect(() => {
-    if (isSignedIn) {
-      fetch("/api/auth/sync-user", { method: "POST" });
-    }
-  }, [isSignedIn]);
 
   useEffect(() => {
+    if (isSignedIn) {
+      fetch("/api/auth/sync-user", { method: "POST" }); 
+    }
     if (user?.isSignedIn) {
       fetchCartProducts();
+      fetchAddresses();
       
     } else {
+      setAddresses([]);
       setCartProducts([]);
     }
   }, [user?.isSignedIn]);

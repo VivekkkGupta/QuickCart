@@ -1,11 +1,10 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Link from "next/link"
-import { ShoppingBag, Star, User2Icon, LogOut, User } from 'lucide-react'
+import { ShoppingBag, User2Icon, LogOut, TruckIcon } from 'lucide-react'
 import Image from 'next/image'
 import { SignOutButton } from '@clerk/nextjs'
-
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -16,11 +15,20 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useAppContext } from '@/contexts/AppContext'
-import { TruckIcon } from 'lucide-react'
 
 const UserDropdown = ({ firstName, imageUrl }) => {
-
     const { routesObject } = useAppContext()
+    const [loggingOut, setLoggingOut] = useState(false);
+
+    if (loggingOut) {
+        return (
+            <div className="flex items-center justify-center w-40 h-40">
+                <span className="animate-spin rounded-full border-4 border-orange-600 border-t-transparent h-8 w-8"></span>
+                <span className="ml-3 text-orange-600 font-medium">Logging out...</span>
+            </div>
+        );
+    }
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -34,12 +42,6 @@ const UserDropdown = ({ firstName, imageUrl }) => {
                 <DropdownMenuLabel>{firstName}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    {/* <DropdownMenuItem asChild>
-                        <Link href={routesObject['profile'].path} className="flex gap-4 w-full">
-                            <User />
-                            <span>Profile</span>
-                        </Link>
-                    </DropdownMenuItem> */}
                     <DropdownMenuItem asChild>
                         <Link href={routesObject['orders'].path} className="flex gap-4 w-full">
                             <ShoppingBag />
@@ -55,7 +57,10 @@ const UserDropdown = ({ firstName, imageUrl }) => {
                 </DropdownMenuGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                    <SignOutButton redirectUrl={routesObject['home'].path}>
+                    <SignOutButton
+                        redirectUrl="/"
+                        signOutCallback={() => setLoggingOut(true)}
+                    >
                         <div className='flex gap-4 w-full items-center cursor-pointer '>
                             <LogOut />
                             <span>Log out</span>
