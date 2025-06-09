@@ -269,14 +269,6 @@ export const AppContextProvider = ({ children }) => {
   };
 
 
-
-  // Only log when loaded, and only once per change
-  useEffect(() => {
-    if (user.isLoaded) {
-      console.log(isSignedIn, user?.isSignedIn, "User Sign In Status");
-    }
-  }, [isSignedIn, user?.isSignedIn, user.isLoaded]);
-
   // Sync user only when signed in and loaded
   useEffect(() => {
     if (user.isLoaded && isSignedIn) {
@@ -294,6 +286,10 @@ export const AppContextProvider = ({ children }) => {
       setCartProducts([]);
     }
   }, [user.isSignedIn, user.isLoaded]);
+
+  useEffect(() => {
+    getProductsData()
+  }, []);
 
   const values = useMemo(() => ({
     cartProducts,
