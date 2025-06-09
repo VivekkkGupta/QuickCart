@@ -289,6 +289,8 @@ export const AppContextProvider = ({ children }) => {
 
   useEffect(() => {
     getProductsData()
+    fetchCategories()
+    
   }, []);
 
   const values = useMemo(() => ({
