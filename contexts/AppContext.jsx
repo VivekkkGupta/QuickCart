@@ -276,6 +276,13 @@ export const AppContextProvider = ({ children }) => {
     if (addresses.length === 0) fetchAddresses();
   }, []);
 
+  const { isSignedIn } = useAuth();
+
+  useEffect(() => {
+    if (isSignedIn) {
+      fetch("/api/auth/sync-user", { method: "POST" });
+    }
+  }, [isSignedIn]);
 
   useEffect(() => {
     if (user?.isSignedIn) {
